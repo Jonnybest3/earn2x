@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn2X Master Hub</title>
     <style>
-        body { font-family: -apple-system, sans-serif; padding: 15px; background: #f8fafc; color: #334155; max-width: 500px; margin: 0 auto; line-height: 1.4; }
-        .box { background: white; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .notice { background: #1e3a8a; color: white; padding: 12px; border-radius: 6px; font-size: 11px; text-align: center; font-weight: 600; margin-bottom: 20px; }
-        h1 { font-size: 24px; font-weight: 900; color: #1e3a8a; margin: 0 0 10px 0; text-align: center; }
-        h2 { font-size: 18px; font-weight: 800; color: #dc2626; margin: 0 0 15px 0; border-bottom: 2px solid #fee2e2; padding-bottom: 5px; }
-        h3 { font-size: 16px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
+        body { font-family: sans-serif; padding: 15px; background: #f8fafc; color: #334155; max-width: 500px; margin: 0 auto; }
+        .box { background: white; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 25px; }
+        .notice { background: #1e3a8a; color: white; padding: 12px; border-radius: 6px; font-size: 11px; text-align: center; font-weight: bold; margin-bottom: 20px; }
+        h1 { font-size: 24px; font-weight: bold; color: #1e3a8a; margin: 0 0 10px 0; text-align: center; }
+        h2 { font-size: 18px; font-weight: bold; color: #dc2626; margin: 0 0 15px 0; border-bottom: 2px solid #fee2e2; padding-bottom: 5px; }
+        h3 { font-size: 16px; font-weight: bold; color: #2563eb; margin: 0 0 10px 0; }
         label { display: block; font-weight: bold; margin-top: 12px; font-size: 12px; color: #475569; }
         input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; }
         button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; text-align: center; }
@@ -38,15 +38,15 @@
         <h2>Master Admin Control Suite</h2>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Inject daily rotational tasks directly into the simulation grid mapping to your 5 plan structures.</p>
         
-        <div>
+        <form action="#" onsubmit="handleLegacyInjection(event); return false;">
             <label>Task Objective Title</label>
-            <input type="text" id="task-title" placeholder="Type title here (e.g. Trivia Challenge)">
+            <input type="text" id="task-title" required value="Starter Trivia Challenge">
 
             <label>Task Guidelines / Instructions</label>
-            <textarea id="task-desc" rows="3" placeholder="Type instructions here..."></textarea>
+            <textarea id="task-desc" rows="3" required>Answer 5 fun trivia questions honestly and only one successful submission is allowed per daily task.</textarea>
 
             <label>Earning Payout Points (100 Pts = ₦100)</label>
-            <input type="number" id="task-reward" placeholder="e.g. 250">
+            <input type="number" id="task-reward" required value="250">
 
             <label>Target Access Plan Tier Group</label>
             <select id="task-tier">
@@ -57,9 +57,8 @@
                 <option value="Premium">Premium Access Tier</option>
             </select>
 
-            <!-- Foolproof button completely disconnected from form submission constraints -->
-            <button type="button" onclick="forcedTaskInjection()" class="btn-admin">Inject Live Task Object</button>
-        </div>
+            <button type="submit" class="btn-admin">Inject Live Task Object</button>
+        </form>
     </div>
 
     <!-- 2. LIVE CUSTOMER WORK SPACE & WALLET BALANCE TRACKER -->
@@ -74,18 +73,19 @@
         </div>
         
         <h3 style="font-size: 14px; margin-top: 20px;">Your Available Daily Rotational Tasks Pool</h3>
-        <div id="allocated-tasks-list" class="space-y-3">
+        <div id="allocated-tasks-list">
             <!-- Starting placeholder task -->
-            <div class="task-card" id="task-initial-item">
-                <div style="display:flex; justify-content:space-between; font-weight:bold; color:#1e3a8a;">
-                    <span>🎮 Starter Trivia Challenge</span>
-                    <span style="color:#16a34a;">+ 250 Points (₦250)</span>
+            <div class="task-card" id="item-initial-task">
+                <div style="font-weight:bold; color:#1e3a8a;">
+                    🎮 <span id="lbl-init-title">Starter Trivia Challenge</span> 
+                    <span style="color:#16a34a; float:right;">+ 250 Points (₦250)</span>
                 </div>
-                <p style="margin:5px 0; color:#64748b; font-size:11px;">Answer 5 simple general entertainment questions correctly to complete this task. One successful submission allowed per daily task.</p>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:10px;">
-                    <span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; font-weight:bold; border-radius:4px; text-transform:uppercase;">Starter Tier Option</span>
-                    <button onclick="executeSimulatedPayout(250, 'task-initial-item')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a;">Start & Complete Click</button>
+                <p style="margin:5px 0; color:#64748b; font-size:11px;" id="lbl-init-desc">Answer 5 fun trivia questions honestly and only one successful submission is allowed per daily task.</p>
+                <div style="margin-top:8px; font-size:10px; text-align:right;">
+                    <span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; font-weight:bold; border-radius:4px; text-transform:uppercase; float:left;">Starter Tier</span>
+                    <button type="button" id="btn-init-click" onclick="executeLegacyPayout(250, 'btn-init-click')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a; display:inline-block;">Start & Complete Click</button>
                 </div>
+                <div style="clear:both;"></div>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
         <h3 style="color: #16a34a; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dcfce7; padding-bottom: 5px; margin-bottom: 15px;">Verified Bank Withdrawal Request</h3>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Minimum withdrawal threshold parameter requires exactly <b>₦5,000 (5,000 Points)</b> balance ledger logs.</p>
         
-        <div>
+        <form action="#" onsubmit="handleLegacyWithdrawal(event); return false;">
             <label>Select Local Bank</label>
             <select id="wd-bank">
                 <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
@@ -115,36 +115,49 @@
             <label>Withdrawal Target Amount (₦)</label>
             <input type="number" id="wd-amount" placeholder="5000">
 
-            <button type="button" onclick="executeSimulatedWithdrawal()" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
-        </div>
-    </div>
-
-    <!-- 4. MEMBERSHIP ACCESS PRICE REFERENCE GRID -->
-    <div class="box">
-        <h3 style="color: #475569;">Membership Security Access Plans</h3>
-        <div class="plan-grid">
-            <div class="plan-card"><b style="color:#0f172a;">STARTER</b><br><span style="color:#2563eb; font-weight:bold;">₦2,500</span><br>2 Daily Tasks</div>
-            <div class="plan-card"><b style="color:#0f172a;">BRONZE</b><br><span style="color:#2563eb; font-weight:bold;">₦5,000</span><br>3 Daily Tasks</div>
-            <div class="plan-card"><b style="color:#0f172a;">SILVER</b><br><span style="color:#2563eb; font-weight:bold;">₦10,000</span><br>4 Daily Tasks</div>
-            <div class="plan-card"><b style="color:#0f172a;">GOLD</b><br><span style="color:#2563eb; font-weight:bold;">₦20,000</span><br>5 Daily Tasks</div>
-            <div class="plan-card" style="grid-column: span 2;"><b style="color:#0f172a;">PREMIUM ACCESS</b><br><span style="color:#2563eb; font-weight:bold;">₦40,000</span><br>6 Daily Tasks Pool Ceiling Cap</div>
-        </div>
+            <button type="submit" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
+        </form>
     </div>
 
     <script>
-        let globalWalletBalance = 0;
-        let internalTaskCounter = 0;
+        var globalBalanceInt = 0;
 
-        // Fully independent injection logic that runs instantly even if fields are left blank
-        window.forcedTaskInjection = function() {
-            let title = document.getElementById('task-title').value;
-            let desc = document.getElementById('task-desc').value;
-            let rewardText = document.getElementById('task-reward').value;
-            let tier = document.getElementById('task-tier').value;
+        // Legacy ES5 Function - Works perfectly on Opera Mini servers
+        function handleLegacyInjection(e) {
+            var taskTitle = document.getElementById('task-title').value;
+            var taskDesc = document.getElementById('task-desc').value;
+            var taskReward = document.getElementById('task-reward').value;
+            var taskTier = document.getElementById('task-tier').value;
 
-            // Automated fallbacks if user leaves inputs empty
-            if (!title) title = "Custom Operational Task";
-            if (!desc) desc = "Complete the required engagement parameters successfully to claim your reward conversion points.";
-            let reward = rewardText ? parseInt(rewardText) : 500;
+            // Update the display content dynamically using standard text mapping
+            document.getElementById('lbl-init-title').innerHTML = taskTitle;
+            document.getElementById('lbl-init-desc').innerHTML = taskDesc;
+            
+            // Re-bind the click action button cleanly
+            var clickBtn = document.getElementById('btn-init-click');
+            clickBtn.disabled = false;
+            clickBtn.style.background = "#16a34a";
+            clickBtn.innerHTML = "Start & Complete Click";
+            clickBtn.onclick = function() {
+                executeLegacyPayout(parseInt(taskReward), 'btn-init-click');
+            };
 
-            internalTaskCounter++;
+            alert("SUCCESS! Task updated in the daily active simulation workspace pool!");
+        }
+
+        function executeLegacyPayout(pointsAmt, buttonId) {
+            globalBalanceInt = globalBalanceInt + pointsAmt;
+            
+            // Render update using standard string concatenation
+            document.getElementById('lbl-user-balance').innerHTML = "₦" + globalBalanceInt + ".00 (" + globalBalanceInt + " Points)";
+            
+            var targetBtn = document.getElementById(buttonId);
+            if(targetBtn) {
+                targetBtn.disabled = true;
+                targetBtn.style.background = "#94a3b8";
+                targetBtn.innerHTML = "✅ Task Log Executed";
+            }
+
+            alert("Congratulations! " + pointsAmt + " Points added to your balance layout ledger!");
+        }
+
