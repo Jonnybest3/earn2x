@@ -3,152 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X</title>
-    <!-- Lightweight mobile styling engine -->
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>Earn2X Portal</title>
+    <!-- Built-in mobile fallback text styling -->
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #fafafa; color: #333; max-width: 500px; margin: 0 auto; }
+        .box { background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h1, h2, h3 { margin-top: 0; color: #1e3a8a; }
+        label { display: block; font-weight: bold; margin-top: 10px; font-size: 13px; }
+        input { w-index: 100%; width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #1d4ed8; }
+        .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .plan-card { border: 1px solid #eee; padding: 10px; border-radius: 4px; text-align: center; background: #f8fafc; }
+    </style>
+    <!-- Direct cloud database integration script -->
     <script src="https://unpkg.com"></script>
-    <style>.view-section { display: none; } .view-section.active { display: block; }</style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans p-4">
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-3 rounded mb-4 flex justify-between items-center text-sm font-bold">
-        <a href="#" onclick="showSection('home')">Earn2X</a>
-        <div class="space-x-3">
-            <a href="#" onclick="showSection('plans')">Plans</a>
-            <a href="#" id="auth-nav-link" onclick="showSection('auth')">Join Portal</a>
-        </div>
-    </nav>
+<body>
 
-    <!-- Home Page View -->
-    <section id="sec-home" class="view-section active text-center py-6 space-y-3">
-        <h1 class="text-2xl font-black text-gray-800">Complete Tasks. Get Paid.</h1>
-        <p class="text-sm text-gray-600 max-w-xs mx-auto">Access legitimate, paid tasks. Activate a security plan layout to start allocation tracking.</p>
-        <button onclick="showSection('plans')" class="bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded shadow">View Membership Plans</button>
-    </section>
+    <!-- 1. Hero Block -->
+    <div class="box">
+        <h1>Earn2X Hub</h1>
+        <p>Complete legitimate tasks. Deliver value. Get compensated.</p>
+    </div>
 
-    <!-- Plans Page View -->
-    <section id="sec-plans" class="view-section hidden space-y-3">
-        <h2 class="text-lg font-bold text-center text-gray-700">Select Access Plan</h2>
-        <div class="grid gap-3 grid-cols-2 text-xs">
-            <div class="bg-white p-3 rounded border shadow-sm">
-                <h3 class="font-bold">Basic</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦1,000</p>
-                <button onclick="showSection('auth')" class="bg-gray-800 text-white w-full py-1 rounded font-bold">Select</button>
-            </div>
-            <div class="bg-white p-3 rounded border shadow-sm">
-                <h3 class="font-bold">Standard</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦5,000</p>
-                <button onclick="showSection('auth')" class="bg-gray-800 text-white w-full py-1 rounded font-bold">Select</button>
-            </div>
-            <div class="bg-white p-3 rounded border shadow-sm">
-                <h3 class="font-bold">Premium</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦10,000</p>
-                <button onclick="showSection('auth')" class="bg-gray-800 text-white w-full py-1 rounded font-bold">Select</button>
-            </div>
-            <div class="bg-white p-3 rounded border shadow-sm">
-                <h3 class="font-bold">Pro</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦25,000</p>
-                <button onclick="showSection('auth')" class="bg-blue-600 text-white w-full py-1 rounded font-bold">Select</button>
-            </div>
-        </div>
-    </section>
+    <!-- 2. Core Registration Form (Always visible by default) -->
+    <div class="box">
+        <h2>Account Registration Portal</h2>
+        <p style="font-size: 12px; color: #666;">Fill your parameters here to register your profile instantly.</p>
+        <form id="frm-direct-auth">
+            <label>Full Name</label>
+            <input type="text" id="reg-name" required placeholder="John Doe">
 
-    <!-- Authentication View -->
-    <section id="sec-auth" class="view-section hidden bg-white p-4 rounded border max-w-xs mx-auto space-y-3">
-        <div class="flex border-b text-xs font-bold text-center">
-            <button onclick="setAuthMode(true)" id="tab-l" class="w-1/2 pb-2 border-b-2 border-blue-600 text-blue-600">Login</button>
-            <button onclick="setAuthMode(false)" id="tab-r" class="w-1/2 pb-2 text-gray-400">Register</button>
-        </div>
-        <form id="frm-auth" class="space-y-3 text-xs">
-            <div id="wrapper-name" class="hidden">
-                <label class="block font-bold text-gray-600">Full Name</label>
-                <input type="text" id="in-name" class="w-full p-2 border rounded mt-1" placeholder="John Doe">
-            </div>
-            <div>
-                <label class="block font-bold text-gray-600">Email Address</label>
-                <input type="email" id="in-email" required class="w-full p-2 border rounded mt-1" placeholder="user@example.com">
-            </div>
-            <div>
-                <label class="block font-bold text-gray-600">Password</label>
-                <input type="password" id="in-pass" required class="w-full p-2 border rounded mt-1" placeholder="••••••••">
-            </div>
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded font-bold shadow">Submit Portal Request</button>
+            <label>Email Address</label>
+            <input type="email" id="reg-email" required placeholder="yourname@example.com">
+
+            <label>Password</label>
+            <input type="password" id="reg-pass" required placeholder="••••••••">
+
+            <button type="submit">Process System Registration</button>
         </form>
-    </section>
+    </div>
 
-    <!-- User Dashboard View -->
-    <section id="sec-dash" class="view-section hidden space-y-4">
-        <div class="bg-white p-4 rounded border shadow-sm flex justify-between items-center text-xs">
-            <div><h2 class="font-bold text-sm">Welcome, <span id="lbl-name">User</span></h2><p class="text-gray-400">Tier: <span id="lbl-plan" class="font-bold text-blue-600">Free</span></p></div>
-            <div class="text-right"><p class="text-gray-400">Balance</p><p class="text-lg font-black text-green-600" id="lbl-balance">₦0.00</p></div>
+    <!-- 3. Plan Layout Structure -->
+    <div class="box">
+        <h2>Membership Security Plans</h2>
+        <div class="plan-grid">
+            <div class="plan-card"><h3>Basic</h3><p><b>₦1,000</b></p></div>
+            <div class="plan-card"><h3>Standard</h3><p><b>₦5,000</b></p></div>
+            <div class="plan-card"><h3>Premium</h3><p><b>₦10,000</b></p></div>
+            <div class="plan-card"><h3>Pro</h3><p><b>₦25,000</b></p></div>
         </div>
-        <div class="bg-white p-3 rounded border text-xs">
-            <h3 class="font-bold text-gray-700 mb-2">Your Allocated Task Pool</h3>
-            <div id="box-tasks" class="space-y-2"></div>
-        </div>
-    </section>
-
-    <!-- Admin Panel View -->
-    <section id="sec-admin" class="view-section hidden space-y-4">
-        <h2 class="text-lg font-black text-red-600 border-b pb-1">Admin Interface Terminal</h2>
-        <form id="frm-admin-task" class="bg-white p-3 rounded border text-xs space-y-2">
-            <input type="text" id="task-t" placeholder="Task Title" required class="w-full p-2 border rounded">
-            <textarea id="task-d" placeholder="Task Guidelines" required class="w-full p-2 border rounded"></textarea>
-            <input type="number" id="task-r" placeholder="Payout Reward (₦)" required class="w-full p-2 border rounded">
-            <select id="task-p" class="w-full p-2 border rounded bg-white"><option value="Basic">Basic Tier</option><option value="Standard">Standard Tier</option><option value="Premium">Premium Tier</option><option value="Pro">Pro Tier</option></select>
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded font-bold">Inject Task Object</button>
-        </form>
-        <div id="box-queue" class="space-y-2 text-xs"></div>
-    </section>
+    </div>
 
     <script>
-        const client = window.supabase.createClient("https://supabase.co", "sb_publishable_6n_C8Gyazb-_1uEioVHVxA_gi0dSQ_w");
-        let activeUser = null, activeProfile = null, isLogin = true;
+        // Direct integration routing configurations
+        const supabaseUrl = "https://supabase.co";
+        const supabaseKey = "sb_publishable_6n_C8Gyazb-_1uEioVHVxA_gi0dSQ_w";
+        const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        function showSection(id) {
-            document.querySelectorAll('.view-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(`sec-${id}`).classList.remove('hidden');
-        }
-        function setAuthMode(mode) {
-            isLogin = mode;
-            document.getElementById('wrapper-name').classList.toggle('hidden', isLogin);
-            document.getElementById('tab-l').className = isLogin ? "w-1/2 pb-2 border-b-2 border-blue-600 text-blue-600" : "w-1/2 pb-2 text-gray-400";
-            document.getElementById('tab-r').className = !isLogin ? "w-1/2 pb-2 border-b-2 border-blue-600 text-blue-600" : "w-1/2 pb-2 text-gray-400";
-        }
-        document.getElementById('frm-auth').addEventListener('submit', async (e) => {
+        document.getElementById('frm-direct-auth').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('in-email').value, pass = document.getElementById('in-pass').value;
-            if (isLogin) {
-                const { data, error } = await client.auth.signInWithPassword({ email, password: pass });
-                if (error) return alert(error.message);
-                syncSession();
-            } else {
-                const name = document.getElementById('in-name').value;
-                const { data, error } = await client.auth.signUp({ email, password: pass });
-                if (error) return alert(error.message);
-                if (data.user) {
-                    await client.from('profiles').insert([{ id: data.user.id, email, full_name: name }]);
-                    alert("Account setup complete! Logging in...");
-                    syncSession();
-                }
+            const fullName = document.getElementById('reg-name').value;
+            const emailAddress = document.getElementById('reg-email').value;
+            const userPassword = document.getElementById('reg-pass').value;
+
+            // Direct cloud profile injection execution
+            const { data, error } = await dbClient.auth.signUp({ 
+                email: emailAddress, 
+                password: userPassword 
+            });
+
+            if (error) {
+                alert("Database Error: " + error.message);
+            } else if (data.user) {
+                await dbClient.from('profiles').insert([
+                    { id: data.user.id, email: emailAddress, full_name: fullName }
+                ]);
+                alert("SUCCESS! Account setup complete inside the cloud network portal!");
             }
         });
-        async function syncSession() {
-            const { data: { session } } = await client.auth.getSession();
-            if (session) {
-                activeUser = session.user;
-                const { data } = await client.from('profiles').select('*').eq('id', activeUser.id).single();
-                activeProfile = data;
-                document.getElementById('auth-nav-link').outerHTML = `<button onclick="location.reload()" class="bg-red-500 text-white px-2 py-1 rounded text-xs">Logout</button>`;
-                if (activeProfile.is_admin) { showSection('admin'); pullAdminQueue(); } 
-                else { showSection('dash'); renderDash(); pullUserTasks(); }
-            }
-        }
-        function renderDash() {
-            document.getElementById('lbl-name').innerText = activeProfile.full_name || activeProfile.email;
-            document.getElementById('lbl-plan').innerText = activeProfile.plan;
-            document.getElementById('lbl-balance').innerText = `₦${parseFloat(activeProfile.balance).toLocaleString()}`;
-        }
-        async function pullUserTasks() {
-            const container = document.getElementById('box-tasks'); container.innerHTML = '';
-            const { data } = await client.from('tasks').select('*');
-            if(!data || data.length === 0) container.innerHTML = `<p class="text-gray-400 py-2">No tasks deployed yet.</p>`;
-            data.forEach(t => {
-                container.innerHTML += `<div class="bg-white p-3 rounded border shadow-2xs">
-                    <div class="flex justify-between font-bold"><h4>${t.title}</h4><span class="text-green-600">₦${t.reward}</span></div>
+    </script>
+</body>
+</html>
