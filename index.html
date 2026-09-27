@@ -3,156 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X Master Hub</title>
-    <style>
-        body { font-family: sans-serif; padding: 15px; background: #fafafa; color: #333; max-width: 500px; margin: 0 auto; }
-        .box { background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        h1, h2, h3 { margin-top: 0; color: #1e3a8a; }
-        .admin-header { color: #dc2626 !important; border-bottom: 2px solid #fee2e2; padding-bottom: 5px; }
-        label { display: block; font-weight: bold; margin-top: 10px; font-size: 13px; }
-        input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
-        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; }
-        .btn-admin { background: #dc2626; }
-        .btn-admin:hover { background: #b91c1c; }
-        .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .plan-card { border: 1px solid #eee; padding: 10px; border-radius: 4px; text-align: center; background: #f8fafc; font-size: 12px; }
-    </style>
+    <title>Earn2X | Ultimate Task & Reward Platform Hub</title>
+    <!-- Lightweight Mobile Styling Utility Grid Framework Engine -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <script src="https://unpkg.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f1f5f9; }
+        .view-tab { display: none; }
+        .view-tab.active { display: block; }
+        .alert-toast { position: fixed; top: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
 </head>
-<body>
+<body class="text-gray-900 antialiased bg-slate-50">
 
-    <!-- 1. HEADER HERO BLOCK -->
-    <div class="box">
-        <h1>Earn2X Hub</h1>
-        <p style="margin: 0; font-size: 14px; color: #555;">Complete legitimate tasks. Deliver value. Get compensated.</p>
+    <!-- PLATFORM CORE NOTICE BANNER -->
+    <div class="bg-blue-900 text-white px-4 py-2 text-center text-xs font-semibold">
+        📢 NOTICE: Earn2x is a performance task and rewards framework. Access duration metrics are active for 3 months from plan activation. Rewards are accumulated strictly via successful completion parameters and are never guaranteed inherently by membership purchases.
     </div>
 
-    <!-- 2. MASTER ADMINISTRATOR TERMINAL (Always Unlocked by Default) -->
-    <div class="box" style="border: 2px solid #fca5a5;">
-        <h2 class="admin-header">Master Admin Interface</h2>
-        <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Use this form panel to inject live tasks directly into the user database pool matching your structural membership layout framework.</p>
-        <form id="frm-admin-task">
-            <label>Task Title</label>
-            <input type="text" id="task-title" required placeholder="e.g., Follow Instagram Account">
-
-            <label>Task Guidelines / Description</label>
-            <textarea id="task-desc" rows="3" required placeholder="Type instructions here..."></textarea>
-
-            <label>Payout Reward (₦)</label>
-            <input type="number" id="task-reward" required placeholder="1000">
-
-            <label>Allowed Membership Plan Tier</label>
-            <select id="task-tier">
-                <option value="Basic">Basic (₦1,000)</option>
-                <option value="Standard">Standard (₦5,000)</option>
-                <option value="Premium">Premium (₦10,000)</option>
-                <option value="Pro">Pro (₦25,000)</option>
-            </select>
-
-            <button type="submit" class="btn-admin">Inject Live Task Object</button>
-        </form>
-    </div>
-
-    <!-- 3. PENDING SUBMISSIONS QUEUE -->
-    <div class="box" style="border: 1px solid #fca5a5;">
-        <h3 style="color: #dc2626;">Pending User Tasks Verification</h3>
-        <div id="admin-submissions-queue" style="font-size: 12px; color: #666;">
-            Loading active data parameters queue...
-        </div>
-    </div>
-
-    <!-- 4. ACCOUNT REGISTRATION & LOGIN PORTAL -->
-    <div class="box">
-        <h2>User Authentication System</h2>
-        <form id="frm-direct-auth">
-            <label>Full Name (For Registration Only)</label>
-            <input type="text" id="reg-name" placeholder="John Benunoh">
-
-            <label>Email Address</label>
-            <input type="email" id="reg-email" required placeholder="johnunoh555@gmail.com">
-
-            <label>Password</label>
-            <input type="password" id="reg-pass" required placeholder="••••••••">
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <button type="button" onclick="handleAuthAction('login')" style="background: #10b981;">Log In</button>
-                <button type="button" onclick="handleAuthAction('register')" style="background: #2563eb;">Register New Account</button>
+    <!-- RESPONSIVE DYNAMIC NAVIGATION MODULE -->
+    <nav class="bg-blue-700 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" onclick="routeTo('home')" class="font-black text-xl tracking-wider">Earn2X</a>
+            <div class="flex items-center space-x-2 overflow-x-auto text-xs font-bold scrollbar-none max-w-xs">
+                <a href="#" onclick="routeTo('home')" class="px-2 py-1 hover:bg-blue-600 rounded">Home</a>
+                <a href="#" onclick="routeTo('plans')" class="px-2 py-1 hover:bg-blue-600 rounded">Plans</a>
+                <a href="#" onclick="routeTo('tasks')" class="px-2 py-1 hover:bg-blue-600 rounded">Daily Tasks</a>
+                <a href="#" onclick="routeTo('withdraw')" class="px-2 py-1 hover:bg-blue-600 rounded">Withdraw</a>
+                <a href="#" id="nav-btn-auth" onclick="routeTo('auth')" class="bg-white text-blue-700 px-3 py-1 rounded shadow">Login</a>
             </div>
-        </form>
-    </div>
-
-    <!-- 5. MEMBERSHIP ACCESS LEVELS -->
-    <div class="box">
-        <h2>Membership Security Plans</h2>
-        <div class="plan-grid">
-            <div class="plan-card"><h3>Basic</h3><p><b>₦1,000</b></p></div>
-            <div class="plan-card"><h3>Standard</h3><p><b>₦5,000</b></p></div>
-            <div class="plan-card"><h3>Premium</h3><p><b>₦10,000</b></p></div>
-            <div class="plan-card"><h3>Pro</h3><p><b>₦25,000</b></p></div>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        const supabaseUrl = "https://supabase.co";
-        const supabaseKey = "sb_publishable_6n_C8Gyazb-_1uEioVHVxA_gi0dSQ_w";
-        const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+    <!-- CONTENT INJECTION CORE STACK -->
+    <main class="max-w-4xl mx-auto px-4 py-6">
 
-        // Task Injection Engine
-        document.getElementById('frm-admin-task').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const title = document.getElementById('task-title').value;
-            const description = document.getElementById('task-desc').value;
-            const reward = document.getElementById('task-reward').value;
-            const allowed_plan = document.getElementById('task-tier').value;
+        <!-- A. HOME LANDING MODULE CONTAINER -->
+        <section id="tab-home" class="view-tab active space-y-6 text-center py-8">
+            <h1 class="text-3xl font-black tracking-tight text-slate-800">Complete legimate tasks.<br><span class="text-blue-600">Get Compensated.</span></h1>
+            <p class="text-sm text-gray-600 max-w-sm mx-auto">Access rotating gaming quiz engines, opinion surveys, and digital analytics evaluation workflows directly mapped to verified local payouts.</p>
+            <div class="pt-4 flex justify-center space-x-3">
+                <button onclick="routeTo('plans')" class="bg-blue-600 text-white font-bold text-xs px-5 py-3 rounded shadow-md">Explore Membership Plans</button>
+                <button onclick="routeTo('how-it-works')" class="bg-gray-200 text-gray-700 font-bold text-xs px-5 py-3 rounded">How It Works</button>
+            </div>
+        </section>
 
-            const { error } = await dbClient.from('tasks').insert([{ title, description, reward, allowed_plan }]);
-            if (error) {
-                alert("Task Error: " + error.message);
-            } else {
-                alert("SUCCESS! New operational objective pushed live to database nodes!");
-                document.getElementById('frm-admin-task').reset();
-            }
-        });
+        <!-- B. HOW IT WORKS INFORMATIONAL SECTION -->
+        <section id="tab-how-it-works" class="view-tab hidden bg-white p-6 rounded-lg shadow-sm space-y-4">
+            <h2 class="text-xl font-bold border-b pb-2 text-slate-800">Operational System Framework</h2>
+            <div class="space-y-3 text-sm text-gray-600">
+                <p><b>1. Select Access Rank:</b> Purchase an entries package tier mapping to specified task tracking ceilings.</p>
+                <p><b>2. Rotating Database Allocator:</b> Execute dynamic daily digital goals matching system structures.</p>
+                <p><b>3. Point Conversion Multiplier:</b> Points accumulate instantly into your ledger matrices where <b>100 points = ₦100 value</b>.</p>
+                <p><b>4. Bank Withdrawal Logs:</b> Minimum processing payouts limit threshold targets exactly <b>₦5,000 balance metric logs</b> directly to your verified local Nigerian account routing structures.</p>
+            </div>
+        </section>
 
-        // Authentication Management Framework
-        async function handleAuthAction(mode) {
-            const fullName = document.getElementById('reg-name').value;
-            const emailAddress = document.getElementById('reg-email').value;
-            const userPassword = document.getElementById('reg-pass').value;
-
-            if(!emailAddress || !userPassword) return alert("Please fill out Email and Password parameters.");
-
-            if (mode === 'login') {
-                const { data, error } = await dbClient.auth.signInWithPassword({ email: emailAddress, password: userPassword });
-                if (error) return alert("Login Failed: " + error.message);
-                alert("SUCCESS! Verified Session token granted for email: " + emailAddress);
-            } else {
-                const { data, error } = await dbClient.auth.signUp({ email: emailAddress, password: userPassword });
-                if (error) return alert("Registration Failed: " + error.message);
-                if (data.user) {
-                    await dbClient.from('profiles').insert([{ id: data.user.id, email: emailAddress, full_name: fullName }]);
-                    alert("SUCCESS! Profile account created inside database nodes.");
-                }
-            }
-        }
-
-        // Submissions Queue Loader Engine
-        async function loadQueue() {
-            const queueBox = document.getElementById('admin-submissions-queue');
-            const { data, error } = await dbClient.from('submissions').select('*').eq('status', 'Pending');
-            if(error || !data || data.length === 0) {
-                queueBox.innerText = "No pending user submissions active in system queue layout nodes.";
-            } else {
-                queueBox.innerHTML = "";
-                data.forEach(s => {
-                    queueBox.innerHTML += `<div style="border:1px solid #eee; padding:10px; margin-bottom:5px; border-radius:4px; background:#fff;">
-                        <p><b>Task:</b> ${s.task_title}</p>
-                        <p style="background:#f3f4f6; padding:5px; font-style:italic;">"${s.submission_text}"</p>
-                    </div>`;
-                });
-            }
-        }
-        window.onload = loadQueue;
-    </script>
-</body>
-</html>
+        <!-- C. MEMBERSHIP PLANS DISCOVERY SUITE -->
+        <section id="tab-plans" class="view-tab hidden space-y-6">
+            <h2 class="text-2xl font-black text-center text-slate-800">Platform Membership Access Portals</h2>
+            <div class="grid gap-4 md:grid-cols-3 sm:grid-cols-2 text-xs">
+                <!-- PLAN 1: STARTER -->
+                <div class="bg-white p-4 rounded-lg border-2 border-gray-100 flex flex-col justify-between shadow-xs">
+                    <div>
+                        <span class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Starter Access</span>
+                        <h3 class="text-lg font-black text-gray-800 mt-2">STARTER</h3>
+                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Starter">₦2,500</p>
+                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
+                            <li>🎯 <b>2 Daily Tasks</b> Pool Cap</li>
+                            <li> Access Metrics: <b>3 Months Duration</b></li>
+                            <li>🕹️ Quizzes, Polls, Simple Image Games</li>
+                        </ul>
+                    </div>
+                    <button onclick="simulatePlanPurchase('Starter', 2500)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Starter Membership</button>
+                </div>
+                <!-- PLAN 2: BRONZE -->
+                <div class="bg-white p-4 rounded-lg border-2 border-orange-100 flex flex-col justify-between shadow-xs">
+                    <div>
+                        <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Bronze Rank</span>
+                        <h3 class="text-lg font-black text-gray-800 mt-2">BRONZE</h3>
+                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Bronze">₦5,000</p>
+                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
+                            <li>🎯 <b>3 Daily Tasks</b> Pool Cap</li>
+                            <li> Access Metrics: <b>3 Months Duration</b></li>
+                            <li>🧩 Trivia, Word challenges, Short Surveys</li>
+                        </ul>
+                    </div>
+                    <button onclick="simulatePlanPurchase('Bronze', 5000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Bronze Membership</button>
+                </div>
+                <!-- PLAN 3: SILVER -->
+                <div class="bg-white p-4 rounded-lg border-2 border-slate-200 flex flex-col justify-between shadow-xs">
+                    <div>
+                        <span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Silver Rank</span>
+                        <h3 class="text-lg font-black text-gray-800 mt-2">SILVER</h3>
+                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Silver">₦10,000</p>
+                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
+                            <li>🎯 <b>4 Daily Tasks</b> Pool Cap</li>
+                            <li> Access Metrics: <b>3 Months Duration</b></li>
+                            <li>🧠 Memory Games, Puzzles, Content Rating</li>
+                        </ul>
+                    </div>
+                    <button onclick="simulatePlanPurchase('Silver', 10000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Silver Membership</button>
+                </div>
+                <!-- PLAN 4: GOLD -->
+                <div class="bg-white p-4 rounded-lg border-2 border-yellow-200 flex flex-col justify-between shadow-xs">
+                    <div>
+                        <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Gold Premium Rank</span>
+                        <h3 class="text-lg font-black text-gray-800 mt-2">GOLD</h3>
+                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Gold">₦20,000</p>
+                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
+                            <li>🎯 <b>5 Daily Tasks</b> Pool Cap</li>
+                            <li> Access Metrics: <b>3 Months Duration</b></li>
+                            <li>📹 Advanced Feedback, Video Tasks</li>
+                        </ul>
+                    </div>
+                    <button onclick="simulatePlanPurchase('Gold', 20000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Gold Membership</button>
+                </div>
+                <!-- PLAN 5: PREMIUM -->
+                <div class="bg-white p-4 rounded-lg border-2 border-purple-200 flex flex-col justify-between shadow-xs">
+                    <div>
+                        <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Elite Supreme Rank</span>
+                        <h3 class="text-lg font-black text-gray-800 mt-2">PREMIUM</h3>
+                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Premium">₦40,000</p>
+                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
+                            <li>🎯 <b>6 Daily Tasks</b> Pool Cap</li>
+                            <li> Access Metrics: <b>3 Months Duration</b></li>
+                            <li>💎 Premium Special UI/UX Evaluations</li>
+                        </ul>
+                    </div>
