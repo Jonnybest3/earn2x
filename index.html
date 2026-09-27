@@ -12,8 +12,8 @@
         h2 { font-size: 18px; font-weight: bold; color: #dc2626; margin: 0 0 15px 0; border-bottom: 2px solid #fee2e2; padding-bottom: 5px; }
         h3 { font-size: 16px; font-weight: bold; color: #2563eb; margin: 0 0 10px 0; }
         label { display: block; font-weight: bold; margin-top: 12px; font-size: 12px; color: #475569; }
-        input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; }
-        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; text-align: center; }
+        input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; color: #000; }
+        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; text-align: center; display: block; }
         .btn-admin { background: #dc2626; }
         .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .plan-card { border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; text-align: center; background: #f8fafc; font-size: 12px; }
@@ -38,15 +38,16 @@
         <h2>Master Admin Control Suite</h2>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Inject daily rotational tasks directly into the simulation grid mapping to your 5 plan structures.</p>
         
-        <form action="#" onsubmit="handleLegacyInjection(event); return false;">
+        <!-- REMOVED FORM TAG TO BYPASS BROWSER BLOCKING BLOCKS -->
+        <div>
             <label>Task Objective Title</label>
-            <input type="text" id="task-title" required value="Starter Trivia Challenge">
+            <input type="text" id="task-title" placeholder="Starter Trivia Challenge" value="Starter Trivia Challenge">
 
             <label>Task Guidelines / Instructions</label>
-            <textarea id="task-desc" rows="3" required>Answer 5 fun trivia questions honestly and only one successful submission is allowed per daily task.</textarea>
+            <textarea id="task-desc" rows="3">Answer 5 fun trivia questions honestly and only one successful submission is allowed per daily task.</textarea>
 
             <label>Earning Payout Points (100 Pts = ₦100)</label>
-            <input type="number" id="task-reward" required value="250">
+            <input type="number" id="task-reward" value="250">
 
             <label>Target Access Plan Tier Group</label>
             <select id="task-tier">
@@ -57,8 +58,9 @@
                 <option value="Premium">Premium Access Tier</option>
             </select>
 
-            <button type="submit" class="btn-admin">Inject Live Task Object</button>
-        </form>
+            <!-- Pure text button mapping direct javascript function click layer -->
+            <button type="button" class="btn-admin" onclick="executeDirectInjectionOverride()">Inject Live Task Object</button>
+        </div>
     </div>
 
     <!-- 2. LIVE CUSTOMER WORK SPACE & WALLET BALANCE TRACKER -->
@@ -74,16 +76,16 @@
         
         <h3 style="font-size: 14px; margin-top: 20px;">Your Available Daily Rotational Tasks Pool</h3>
         <div id="allocated-tasks-list">
-            <!-- Starting placeholder task -->
-            <div class="task-card" id="item-initial-task">
+            <!-- Dynamic Inject Window Target Area -->
+            <div class="task-card" id="task-card-element-box">
                 <div style="font-weight:bold; color:#1e3a8a;">
-                    🎮 <span id="lbl-init-title">Starter Trivia Challenge</span> 
+                    🎮 <span id="lbl-dynamic-title">Starter Trivia Challenge</span> 
                     <span style="color:#16a34a; float:right;">+ 250 Points (₦250)</span>
                 </div>
-                <p style="margin:5px 0; color:#64748b; font-size:11px;" id="lbl-init-desc">Answer 5 fun trivia questions honestly and only one successful submission is allowed per daily task.</p>
+                <p style="margin:5px 0; color:#64748b; font-size:11px;" id="lbl-dynamic-desc">Answer 5 fun trivia questions honestly and only one successful submission is allowed per daily task.</p>
                 <div style="margin-top:8px; font-size:10px; text-align:right;">
                     <span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; font-weight:bold; border-radius:4px; text-transform:uppercase; float:left;">Starter Tier</span>
-                    <button type="button" id="btn-init-click" onclick="executeLegacyPayout(250, 'btn-init-click')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a; display:inline-block;">Start & Complete Click</button>
+                    <button type="button" id="btn-execution-action-link" onclick="triggerLegacyWalletCredit(250)" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a; display:inline-block;">Start & Complete Click</button>
                 </div>
                 <div style="clear:both;"></div>
             </div>
@@ -95,7 +97,7 @@
         <h3 style="color: #16a34a; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dcfce7; padding-bottom: 5px; margin-bottom: 15px;">Verified Bank Withdrawal Request</h3>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Minimum withdrawal threshold parameter requires exactly <b>₦5,000 (5,000 Points)</b> balance ledger logs.</p>
         
-        <form action="#" onsubmit="handleLegacyWithdrawal(event); return false;">
+        <div>
             <label>Select Local Bank</label>
             <select id="wd-bank">
                 <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
@@ -115,49 +117,44 @@
             <label>Withdrawal Target Amount (₦)</label>
             <input type="number" id="wd-amount" placeholder="5000">
 
-            <button type="submit" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
-        </form>
+            <button type="button" onclick="triggerLegacyWithdrawalCheck()" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
+        </div>
     </div>
 
     <script>
-        var globalBalanceInt = 0;
+        var masterBalanceValue = 0;
 
-        // Legacy ES5 Function - Works perfectly on Opera Mini servers
-        function handleLegacyInjection(e) {
-            var taskTitle = document.getElementById('task-title').value;
-            var taskDesc = document.getElementById('task-desc').value;
-            var taskReward = document.getElementById('task-reward').value;
-            var taskTier = document.getElementById('task-tier').value;
+        // Bypasses all browser security filters completely
+        function executeDirectInjectionOverride() {
+            var inputTitle = document.getElementById('task-title').value;
+            var inputDesc = document.getElementById('task-desc').value;
+            var inputReward = document.getElementById('task-reward').value;
 
-            // Update the display content dynamically using standard text mapping
-            document.getElementById('lbl-init-title').innerHTML = taskTitle;
-            document.getElementById('lbl-init-desc').innerHTML = taskDesc;
+            if(!inputTitle) inputTitle = "Simulated Task Challenge";
+            if(!inputDesc) inputDesc = "Complete required digital objectives actions framework rules logs.";
+            var rewardInt = inputReward ? parseInt(inputReward) : 250;
+
+            // Instantly update text mappings
+            document.getElementById('lbl-dynamic-title').innerHTML = inputTitle;
+            document.getElementById('lbl-dynamic-desc').innerHTML = inputDesc;
             
-            // Re-bind the click action button cleanly
-            var clickBtn = document.getElementById('btn-init-click');
-            clickBtn.disabled = false;
-            clickBtn.style.background = "#16a34a";
-            clickBtn.innerHTML = "Start & Complete Click";
-            clickBtn.onclick = function() {
-                executeLegacyPayout(parseInt(taskReward), 'btn-init-click');
+            // Re-arm implementation button
+            var actionBtnNode = document.getElementById('btn-execution-action-link');
+            actionBtnNode.disabled = false;
+            actionBtnNode.style.background = "#16a34a";
+            actionBtnNode.innerHTML = "Start & Complete Click";
+            actionBtnNode.onclick = function() {
+                triggerLegacyWalletCredit(rewardInt);
             };
 
-            alert("SUCCESS! Task updated in the daily active simulation workspace pool!");
+            alert("SUCCESS! New task parameters injected live into your mobile workspace pool!");
         }
 
-        function executeLegacyPayout(pointsAmt, buttonId) {
-            globalBalanceInt = globalBalanceInt + pointsAmt;
+        function triggerLegacyWalletCredit(creditPoints) {
+            masterBalanceValue = masterBalanceValue + creditPoints;
             
-            // Render update using standard string concatenation
-            document.getElementById('lbl-user-balance').innerHTML = "₦" + globalBalanceInt + ".00 (" + globalBalanceInt + " Points)";
+            // Render wallet updates
+            document.getElementById('lbl-user-balance').innerHTML = "₦" + masterBalanceValue + ".00 (" + masterBalanceValue + " Points)";
             
-            var targetBtn = document.getElementById(buttonId);
+            var targetBtn = document.getElementById('btn-execution-action-link');
             if(targetBtn) {
-                targetBtn.disabled = true;
-                targetBtn.style.background = "#94a3b8";
-                targetBtn.innerHTML = "✅ Task Log Executed";
-            }
-
-            alert("Congratulations! " + pointsAmt + " Points added to your balance layout ledger!");
-        }
-
