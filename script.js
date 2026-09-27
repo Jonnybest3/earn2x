@@ -1,3 +1,4 @@
+
 // EARN2X ENTERPRISE LOGIC ENGINE
 var activePlanName = "Free"; var activePlanCapLimit = 0; var activeTaskRewardAmt = 0;
 var runningUserWalletBalanceNgn = 0; var completedCountTrackerToday = 0;
@@ -27,7 +28,7 @@ function switchSection(id) {
 }
 
 function payWithPaystack(planName, feeAmount, dailyLimitCap, rewardPerTask) {
-    var livePublicKey = 'pk_live_b1c853421041f335e1eca5'; 
+    var livePublicKey = 'pk_live_b1c853421041f335e1eca5f37c3e7e6f378d6703'; 
     var handler = PaystackPop.setup({
         key: livePublicKey, email: 'johnunoh555@gmail.com', amount: feeAmount * 100, currency: 'NGN',
         ref: 'E2X-' + Math.floor((Math.random() * 1000000000) + 1),
@@ -54,7 +55,7 @@ function triggerContinuousTaskRegeneration() {
 }
 
 function executeEarningClick(pointsValue) {
-    var trackingProofValue = prompt("Provide proof verification link:");
+    var trackingProofValue = prompt("Provide deployment url tracking verification parameters code proof link text:");
     if(!trackingProofValue) return alert("Aborted: Proof parameter cannot be blank.");
     runningUserWalletBalanceNgn += pointsValue; completedCountTrackerToday += 1; totalTaskRewardsPaidOutSum += pointsValue;
     document.getElementById('txt-user-bal').innerHTML = "₦" + runningUserWalletBalanceNgn.toLocaleString();
@@ -62,18 +63,18 @@ function executeEarningClick(pointsValue) {
     var currentMinimumThresholdValue = 2000; var deficitLeftToCashoutValue = Math.max(0, currentMinimumThresholdValue - runningUserWalletBalanceNgn);
     document.getElementById('txt-user-remaining').innerHTML = "₦" + runningUserWalletBalanceNgn.toLocaleString() + " / ₦2,000 (₦" + deficitLeftToCashoutValue.toLocaleString() + " Left)";
     document.getElementById('bar-user-fill').style.width = Math.min(100, (runningUserWalletBalanceNgn / currentMinimumThresholdValue) * 100) + "%";
-    alert("✅ TASK COMPLETED! Points released. Spawning next regenerated objective...");
+    alert("✅ TASK COMPLETED! Points released into your running ledger balance. Spawning next regenerated objective...");
     syncGlobalBusinessControlBoardUI(); triggerContinuousTaskRegeneration();
 }
 
 function submitUserWithdrawalRequest() {
     var bName = document.getElementById('bank-name').value; var bAcct = document.getElementById('bank-acct').value; var bTitle = document.getElementById('bank-title').value; var amtVal = parseFloat(document.getElementById('bank-amount').value);
-    if(!amtVal || amtVal < 2000) return alert("Aborted: Minimum targets ₦2,000.");
-    if(amtVal > 30000000) return alert("Aborted: Maximum cannot exceed ₦30,000,000.");
-    if(amtVal > runningUserWalletBalanceNgn) return alert("Aborted: Amount crosses available balance.");
+    if(!amtVal || amtVal < 2000) return alert("Aborted: Minimum platform settlement request threshold targets exactly ₦2,000.");
+    if(amtVal > 30000000) return alert("Aborted: Maximum transaction instance limit cap cannot exceed ₦30,000,000.");
+    if(amtVal > runningUserWalletBalanceNgn) return alert("Aborted: Requested withdrawal sum crosses your available current ledger wallet balances.");
     runningUserWalletBalanceNgn -= amtVal; document.getElementById('txt-user-bal').innerHTML = "₦" + runningUserWalletBalanceNgn.toLocaleString();
     var uniqueWdId = "WD-" + Math.floor((Math.random() * 100000) + 1); localCeoWithdrawalsQueue.push({ id: uniqueWdId, bank: bName, account: bAcct, name: bTitle, amount: amtVal });
-    alert("SUCCESS! Withdrawal request logged into Escrow clearance tracking node.");
+    alert("SUCCESS! Withdrawal request logged into Escrow clearance tracking node. Funds transfer requires administrator manual approval click.");
     document.getElementById('bank-amount').value = ""; renderCeoAdminQueues();
 }
 
@@ -86,38 +87,31 @@ function postCommunityChatMessage() {
 function submitSupportComplaintTicket() {
     var msg = document.getElementById('support-complaint-msg').value; if(!msg) return alert("Complaint box cannot remain empty.");
     var uniqueTicketId = "TKT-" + Math.floor((Math.random() * 100000) + 1); localCeoComplaintsLogs.push({ id: uniqueTicketId, text: msg, user: 'johnunoh555@gmail.com' });
-    alert("SUCCESS! Filed onto the support administrator desk.");
+    alert("SUCCESS! Your issue ticket has been transmitted directly onto the support administrator desk terminal logs.");
     document.getElementById('support-complaint-msg').value = ""; renderCeoAdminQueues();
 }
 
 function renderCeoAdminQueues() {
     var wdContainer = document.getElementById('ceo-withdrawal-approval-list-queue');
-    if(localCeoWithdrawalsQueue.length === 0) { wdContainer.innerHTML = '<p style="color:#64748b; font-style:italic; padding:6px; text-align:center;">No pending bank withdrawal requests.</p>'; }
+    if(localCeoWithdrawalsQueue.length === 0) { wdContainer.innerHTML = '<p style="color:#64748b; font-style:italic; padding:6px; text-align:center;">No pending bank withdrawal requests in clearance queue nodes.</p>'; }
     else {
         var wdContent = "";
-        for(var i=0; i<localCeoWithdrawalsQueue.length; i++) { var w = localCeoWithdrawalsQueue[i]; wdContent += '<div style="background:#111827; border:1px solid #10b981; padding:10px; border-radius:8px; margin-bottom:8px;"><p style="margin:0; font-weight:bold; color:white;">Cashout Request: ₦' + w.amount.toLocaleString() + '</p><p style="margin:2px 0; color:#94a3b8; font-size:10px;">Bank: ' + w.bank + ' | Account: ' + w.account + ' | Name: ' + w.name + '</p><button type="button" class="gradient-border-btn" style="background:#10b981; font-size:11px; padding:6px; margin-top:6px;" onclick="ceoApproveBankPayoutClick(\'' + w.id + '\', ' + w.amount + ')">Approve Payout Clearance</button></div>'; }
+        for(var i=0; i<localCeoWithdrawalsQueue.length; i++) { var w = localCeoWithdrawalsQueue[i]; wdContent += '<div style="background:#111827; border:1px solid #10b981; padding:10px; border-radius:8px; margin-bottom:8px;"><p style="margin:0; font-weight:bold; color:white;">Cashout Request: ₦' + w.amount.toLocaleString() + '</p><p style="margin:2px 0; color:#94a3b8; font-size:10px;">Bank: ' + w.bank + ' | Account: ' + w.account + ' | Name: ' + w.name + '</p><button type="button" class="gradient-border-btn" style="background:#10b981; font-size:11px; padding:6px; margin-top:6px;" onclick="ceoApproveBankPayoutClick(\'' + w.id + '\', ' + w.amount + ')">Approve Payout Clearance & Dispatch Bank Wire</button></div>'; }
         wdContainer.innerHTML = wdContent;
     }
     var cmpContainer = document.getElementById('ceo-complaints-feed-box');
-    if(localCeoComplaintsLogs.length === 0) { cmpContainer.innerHTML = '<p style="color:#64748b; font-style:italic; padding:6px; text-align:center;">No active user helpdesk tickets.</p>'; }
+    if(localCeoComplaintsLogs.length === 0) { cmpContainer.innerHTML = '<p style="color:#64748b; font-style:italic; padding:6px; text-align:center;">No active user helpdesk tickets logged inside dashboard records.</p>'; }
     else {
         var cmpContent = "";
-        for(var j=0; j<localCeoComplaintsLogs.length; j++) { var c = localCeoComplaintsLogs[j]; cmpContent += '<div class="support-ticket"><p style="margin:0; font-weight:bold; color:#06b6d4;">Ticket ID: ' + c.id + ' | From: ' + c.user + '</p><p style="margin:4px 0; color:#cbd5e1; background:#0b0f19; padding:6px; border-radius:4px; font-style:italic;">"' + c.text + '"</p><button type="button" class="gradient-border-btn" style="background:#334155; font-size:10px; padding:4px 10px; margin-top:2px;" onclick="ceoResolveTicketClick(\'' + c.id + '\')">Mark Ticket Resolved</button></div>'; }
+        for(var j=0; j<localCeoComplaintsLogs.length; j++) { var c = localCeoComplaintsLogs[j]; cmpContent += '<div class="support-ticket"><p style="margin:0; font-weight:bold; color:#06b6d4;">Ticket ID: ' + c.id + ' | From: ' + c.user + '</p><p style="margin:4px 0; color:#cbd5e1; background:#0b0f19; padding:6px; border-radius:4px; font-style:italic;">"' + c.text + '"</p><button type="button" class="gradient-border-btn" style="background:#334155; font-size:10px; padding:4px 10px; margin-top:2px;" onclick="ceoResolveTicketClick(\'' + c.id + '\')">Mark Ticket Resolved & Close File</button></div>'; }
         cmpContainer.innerHTML = cmpContent;
     }
 }
 
 window.ceoApproveBankPayoutClick = function(id, amt) {
     var freshQueue = []; for(var i=0; i<localCeoWithdrawalsQueue.length; i++) { if(localCeoWithdrawalsQueue[i].id !== id) freshQueue.push(localCeoWithdrawalsQueue[i]); } localCeoWithdrawalsQueue = freshQueue;
-    alert("🔥 CASH CLEARANCE DISPATCHED!\n₦" + amt.toLocaleString() + " approved and wired."); renderCeoAdminQueues();
+    alert("🔥 CASH CLEARANCE DISPATCHED!\n₦" + amt.toLocaleString() + " approved and wired successfully to user bank routing."); renderCeoAdminQueues();
 };
 
 window.ceoResolveTicketClick = function(id) {
     var freshLogs = []; for(var i=0; i<localCeoComplaintsLogs.length; i++) { if(localCeoComplaintsLogs[i].id !== id) freshLogs.push(localCeoComplaintsLogs[i]); } localCeoComplaintsLogs = freshLogs;
-    alert("Ticket marked closed."); renderCeoAdminQueues();
-};
-
-function syncGlobalBusinessControlBoardUI() {
-    document.getElementById('adm-sales').innerHTML = "₦" + totalBusinessSalesGross.toLocaleString();
-    document.getElementById('adm-payouts').innerHTML = "₦" + totalTaskRewardsPaidOutSum.toLocaleString();
-    var platformProfitNetDelta = totalBusinessSalesGross - totalTaskRewardsPaidOutSum;
