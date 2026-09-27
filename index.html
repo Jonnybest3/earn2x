@@ -3,149 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X Master Hub</title>
+    <title>Earn2X | Premium Task Marketplace & Reward Portal</title>
+    <!-- Professional Typography & Icons -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com"></script>
     <style>
-        body { font-family: sans-serif; padding: 15px; background: #f8fafc; color: #334155; max-width: 500px; margin: 0 auto; }
-        .box { background: white; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 25px; }
-        .notice { background: #1e3a8a; color: white; padding: 12px; border-radius: 6px; font-size: 11px; text-align: center; font-weight: bold; margin-bottom: 20px; }
-        h1 { font-size: 24px; font-weight: bold; color: #1e3a8a; margin: 0 0 10px 0; text-align: center; }
-        h2 { font-size: 18px; font-weight: bold; color: #dc2626; margin: 0 0 15px 0; border-bottom: 2px solid #fee2e2; padding-bottom: 5px; }
-        h3 { font-size: 16px; font-weight: bold; color: #2563eb; margin: 0 0 10px 0; }
-        label { display: block; font-weight: bold; margin-top: 12px; font-size: 12px; color: #475569; }
-        input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; color: #000; }
-        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; text-align: center; display: block; }
-        .btn-admin { background: #dc2626; }
-        .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .plan-card { border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; text-align: center; background: #f8fafc; font-size: 12px; }
-        .task-card { background: #f8fafc; padding: 12px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #e2e8f0; border-left: 4px solid #16a34a; }
-        .status-badge { background: #eff6ff; color: #2563eb; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 15px; border: 1px solid #dbeafe; }
+        * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.2s ease; }
+        body { background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; overflow-x: hidden; }
+        .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; background-color: #0b0f19; padding-bottom: 60px; position: relative; border-left: 1px solid #1e293b; border-right: 1px solid #1e293b; }
+        .view-section { display: none; padding: 16px; }
+        .view-section.active { display: block; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* UI Components Styling */
+        .glass-card { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 16px; backdrop-filter: blur(8px); margin-bottom: 16px; }
+        .gradient-border-btn { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border: none; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 14px; width: 100%; cursor: pointer; display: block; text-align: center; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3); }
+        .gradient-border-btn:active { transform: scale(0.98); }
+        .secondary-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 12px; padding: 12px; font-weight: 600; font-size: 13px; width: 100%; cursor: pointer; text-align: center; }
+        
+        /* Form fields overrides */
+        input, textarea, select { width: 100%; padding: 12px; background: #111827; border: 1px solid #334155; border-radius: 10px; color: white; font-size: 14px; margin-top: 6px; margin-bottom: 14px; }
+        input:focus, select:focus { border-color: #3b82f6; outline: none; }
+        
+        /* Top Navigation Bar */
+        .platform-navbar { background: rgba(11, 15, 25, 0.85); border-bottom: 1px solid #1e293b; padding: 16px; sticky: top; position: sticky; top: 0; backdrop-filter: blur(12px); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo-text { font-size: 20px; font-weight: 800; tracking-spacing: -0.5px; color: #3b82f6; }
+        
+        /* Bottom Corporate Navigation Tabs */
+        .bottom-nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: #0b0f19; border-top: 1px solid #1e293b; display: grid; grid-template-columns: repeat(5, 1fr); padding: 8px 0; z-index: 999; }
+        .nav-item { text-align: center; background: none; border: none; color: #64748b; font-size: 10px; font-weight: 600; cursor: pointer; }
+        .nav-item.active { color: #3b82f6; }
+        .nav-item svg { display: block; margin: 0 auto 4px auto; width: 20px; height: 20px; fill: currentColor; }
+        
+        /* Metrics Progress Bars */
+        .progress-track { width: 100%; background: #1e293b; height: 8px; border-radius: 99px; overflow: hidden; margin: 8px 0; }
+        .progress-fill { background: linear-gradient(90deg, #10b981 0%, #059669 100%); height: 100%; border-radius: 99px; }
+        
+        /* Dynamic Badges styling */
+        .badge { display: inline-block; padding: 4px 8px; font-size: 10px; font-weight: 700; border-radius: 6px; text-transform: uppercase; }
+        .badge-active { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .badge-pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .badge-admin { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
     </style>
 </head>
 <body>
 
-    <!-- PLATFORM CORE NOTICE BANNER -->
-    <div class="notice">
-        📢 NOTICE: Earn2x is a task rewards platform. Membership provides 3 months of access. Rewards require successful task completion and are not guaranteed by purchase.
-    </div>
-
-    <div class="box">
-        <h1>Earn2X Platform Hub</h1>
-        <p style="margin: 0; font-size: 13px; color: #64748b; text-align: center;">Complete daily tasks. Deliver digital value. Accumulate point conversions.</p>
-    </div>
-
-    <!-- 1. LIVE CUSTOMER WORK SPACE & WALLET BALANCE TRACKER -->
-    <div class="box" style="border: 2px solid #bfdbfe;">
-        <h3 style="color: #2563eb; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dbeafe; padding-bottom: 5px; margin-bottom: 15px;">Customer Work Dashboard</h3>
+    <div class="app-container">
         
-        <div class="status-badge">
-            <p style="margin: 0;">👤 Profile Account: <span style="color:#0f172a;">johnunoh555@gmail.com</span></p>
-            <p style="margin: 4px 0 0 0;">🏆 Active Membership Level: <span style="color:#2563eb;">STARTER / BRONZE / SILVER / GOLD / PREMIUM Active Matrix</span></p>
-            <p style="margin: 4px 0 0 0;">⌛ Duration Tracking: <span style="color:#ea580c;">Active | 72 Days Remaining</span></p>
-            <p style="margin: 8px 0 0 0; font-size: 16px; border-top: 1px dashed #cbd5e1; padding-top: 8px;">💰 Current Wallet Balance: <span style="color:#16a34a;" id="lbl-user-balance">₦0.00 (0 Points)</span></p>
-        </div>
-        
-        <h3 style="font-size: 14px; margin-top: 20px; color:#1e3a8a;">Your Live Daily Earning Tasks Pool</h3>
-        <p style="font-size: 11px; color:#666; margin-bottom: 15px;">100 Points = ₦100. Minimum withdrawal threshold is ₦5,000.</p>
-        
-        <!-- AUTOMATICALLY LOADED TASK TARGET GRIDS -->
-        <div id="allocated-tasks-list">
-            <!-- Loaded via window.onload script below -->
-        </div>
-    </div>
+        <!-- GLOBAL APP TOP BAR -->
+        <header class="platform-navbar">
+            <span class="logo-text">EARN<span style="color:white;">2X</span></span>
+            <span id="role-badge" class="badge badge-active" onclick="switchSection('admin')">👤 User Mode</span>
+        </header>
 
-    <!-- 2. VERIFIED LOCAL NIGERIAN BANK PAYOUT TERMINAL -->
-    <div class="box" style="border: 2px solid #bbf7d0;">
-        <h3 style="color: #16a34a; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dcfce7; padding-bottom: 5px; margin-bottom: 15px;">Verified Bank Withdrawal Request</h3>
-        
-        <div>
-            <label>Select Local Bank</label>
-            <select id="wd-bank">
-                <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
-                <option value="Access">Access Bank</option>
-                <option value="Zenith">Zenith Bank</option>
-                <option value="UBA">United Bank for Africa (UBA)</option>
-                <option value="Opay">OPay Digital Services</option>
-                <option value="PalmPay">PalmPay</option>
-            </select>
-
-            <label>Verified Bank Account Number (10 Digits)</label>
-            <input type="number" id="wd-accountnum" placeholder="0123456789">
-
-            <label>Verified Account Legal Name</label>
-            <input type="text" id="wd-accountname" placeholder="John Benunoh">
-
-            <label>Withdrawal Target Amount (₦)</label>
-            <input type="number" id="wd-amount" placeholder="5000">
-
-            <button type="button" onclick="triggerLegacyWithdrawalCheck()" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
-        </div>
-    </div>
-
-    <script>
-        var masterBalanceValue = 0;
-
-        // AUTOMATIC POOL GENERATOR ON PAGE LOAD (No admin injection button needed!)
-        window.onload = function() {
-            var listBox = document.getElementById('allocated-tasks-list');
+        <!-- A. HOMEPAGE PORTAL LANDING SYSTEM -->
+        <section id="view-home" class="view-section active space-y-6">
+            <div class="glass-card" style="text-align:center; padding: 32px 16px;">
+                <h1 style="font-size:28px; font-weight:800; line-height:1.2; margin-bottom:12px;">Complete Legitimate <br><span style="color:#3b82f6;">Digital Tasks.</span></h1>
+                <p style="color:#94a3b8; font-size:14px; margin-bottom:24px;">Nigeria's premium verified task-and-rewards platform. Secure an entries membership package to begin optimization.</p>
+                <button class="gradient-border-btn" style="margin-bottom:12px;" onclick="switchSection('plans')">Explore Membership Plans</button>
+                <button class="secondary-btn" onclick="switchSection('auth')">Access Account Login Portal</button>
+            </div>
             
-            var tasksData = [
-                { id: "t1", title: "STARTER TIER: Entertainment Poll", desc: "Cast your vote on your favorite weekly television show preference parameters.", reward: 250, plan: "Starter" },
-                { id: "t2", title: "BRONZE TIER: Trivia Challenge", desc: "Complete a 3-question general knowledge quiz to test data parameters tracking.", reward: 500, plan: "Bronze" },
-                { id: "t3", title: "SILVER TIER: Spot The Difference Game", desc: "Identify the 3 missing object details inside our layout graphics comparison matrix.", reward: 1000, plan: "Silver" },
-                { id: "t4", title: "GOLD TIER: App UI Experience Feedback", desc: "Review our design components layout grids and write a brief validation summary logs.", reward: 2000, plan: "Gold" },
-                { id: "t5", title: "PREMIUM TIER: Advanced UX Journey Audit", desc: "Test the complete platform operational flow, document latency logs, and get high reward.", reward: 5000, plan: "Premium" }
-            ];
+            <div class="glass-card">
+                <h3 style="margin-bottom:12px;">How The Platform Operates</h3>
+                <p style="font-size:13px; color:#94a3b8; line-height:1.5;">Earn2x connects top digital brands with verified users. Members fulfill daily task targets (polls, UX feedback surveys, creative challenges) and accumulate disclosed points metrics directly into their secure balances wallet. <b>100 Points translates exactly to ₦100.</b></p>
+            </div>
+        </section>
 
-            var htmlContent = "";
-            for (var i = 0; i < tasksData.length; i++) {
-                var t = tasksData[i];
-                htmlContent += '<div class="task-card" id="card-' + t.id + '">' +
-                    '<div style="font-weight:bold; color:#1e3a8a;">' +
-                        '<span>🎮 ' + t.title + '</span>' +
-                        '<span style="color:#16a34a; float:right;">+ ' + t.reward + ' Points (₦' + t.reward + ')</span>' +
-                    '</div>' +
-                    '<p style="margin:5px 0; color:#64748b; font-size:11px;">' + t.desc + '</p>' +
-                    '<div style="margin-top:8px; font-size:10px; text-align:right;">' +
-                        '<span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; font-weight:bold; border-radius:4px; text-transform:uppercase; float:left;">' + t.plan + ' Access</span>' +
-                        '<button type="button" id="btn-' + t.id + '" onclick="triggerLegacyWalletCredit(' + t.reward + ', \'btn-' + t.id + '\')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a; display:inline-block; color:white; font-weight:bold; border-radius:4px;">Start & Complete Click</button>' +
-                    '</div>' +
-                    '<div style="clear:both;"></div>' +
-                '</div>';
-            }
-            listBox.innerHTML = htmlContent;
-        };
+        <!-- B. SECURE USER SIGN IN & SIGN UP LAYOUT -->
+        <section id="view-auth" class="view-section">
+            <div class="glass-card">
+                <h2 id="auth-view-header" style="color:white; font-size:20px; font-weight:800; border:none; margin-bottom:6px;">Welcome to Earn2X</h2>
+                <p style="color:#64748b; font-size:12px; margin-bottom:16px;">Provision secure workspace data mappings parameters logs.</p>
+                
+                <form id="frm-platform-auth" onsubmit="handleAccountAuth(event)">
+                    <div id="auth-name-wrapper">
+                        <label>Full Legal Name</label>
+                        <input type="text" id="auth-name" placeholder="John Benunoh">
+                    </div>
+                    <label>Email Address Anchor</label>
+                    <input type="email" id="auth-email" required placeholder="johnunoh555@gmail.com">
+                    
+                    <label>Secure Password</label>
+                    <input type="password" id="auth-password" required placeholder="••••••••">
+                    
+                    <button type="submit" class="gradient-border-btn" style="margin-top:8px;">Execute Session Verification</button>
+                </form>
+                <p style="text-align:center; font-size:12px; color:#94a3b8; margin-top:16px; cursor:pointer;" id="auth-toggle-msg" onclick="toggleAuthMode()">Don't have an account? Create one</p>
+            </div>
+        </section>
 
-        function triggerLegacyWalletCredit(creditPoints, buttonId) {
-            masterBalanceValue = masterBalanceValue + creditPoints;
-            
-            // Render wallet updates instantly
-            document.getElementById('lbl-user-balance').innerHTML = "₦" + masterBalanceValue + ".00 (" + masterBalanceValue + " Points)";
-            
-            var targetBtn = document.getElementById(buttonId);
-            if(targetBtn) {
-                targetBtn.disabled = true;
-                targetBtn.style.background = "#94a3b8";
-                targetBtn.innerHTML = "✅ Task Completed & Credited";
-            }
+        <!-- C. CLIENT WORKSPACE DASHBOARD TERMINAL -->
+        <section id="view-dashboard" class="view-section">
+            <div class="glass-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%);">
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <div>
+                        <span style="font-size:12px; color:#64748b; font-weight:600;">Welcome Back,</span>
+                        <h2 id="dash-username" style="color:white; font-size:22px; font-weight:800; margin:2px 0 0 0; border:none; padding:0;">Customer Name</h2>
+                    </div>
+                    <span id="dash-plan-badge" class="badge badge-active" style="background:#2563eb; color:white; font-size:11px;">GOLD Tier</span>
+                </div>
+                
+                <div style="margin-top:20px; display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                    <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px;">
+                        <span style="font-size:11px; color:#64748b;">Wallet Balance</span>
+                        <p id="dash-txt-ngn" style="font-size:18px; font-weight:800; color:#10b981; margin:4px 0 0 0;">₦3,750</p>
+                        <p id="dash-txt-pts" style="font-size:11px; color:#94a3b8; margin:2px 0 0 0;">3,750 Points</p>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px;">
+                        <span style="font-size:11px; color:#64748b;">Today's Target Progress</span>
+                        <p id="dash-txt-progress" style="font-size:18px; font-weight:800; color:#3b82f6; margin:4px 0 0 0;">3 / 5 Tasks</p>
+                        <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Daily Completion Cap</p>
+                    </div>
+                </div>
 
-            alert("Success! " + creditPoints + " Points added to your verified ledger balance tracking grid!");
-        }
+                <div style="margin-top:16px; border-top:1px dashed #334155; padding-top:12px;">
+                    <div style="display:flex; justify-content:space-between; font-size:11px; color:#94a3b8; font-weight:600;">
+                        <span>Withdrawal Settlement Meter</span>
+                        <span id="dash-txt-remaining">₦3,750 / ₦5,000 (₦1,250 Left)</span>
+                    </div>
+                    <div class="progress-track"><div id="dash-progress-fill" class="progress-fill" style="width: 75%;"></div></div>
+                </div>
+            </div>
 
-        function triggerLegacyWithdrawalCheck() {
-            var rawAmt = document.getElementById('wd-amount').value;
-            var parsedAmt = rawAmt ? parseFloat(rawAmt) : 5000;
-
-            if(parsedAmt > masterBalanceValue) {
-                alert("Withdrawal Blocked: Amount requested crosses your available current ledger balance of ₦" + masterBalanceValue);
-                return;
-            }
-
-            masterBalanceValue = masterBalanceValue - parsedAmt;
-            document.getElementById('lbl-user-balance').innerHTML = "₦" + masterBalanceValue + ".00 (" + masterBalanceValue + " Points)";
-            
-            alert("SUCCESS! Bank withdrawal escrow payout requested successfully for review clearance audits.");
-            document.getElementById('wd-amount').value = "";
-        }
-    </script>
-</body>
-</html>
+            <!-- MEMBERSHIP DURATION TRACKER META METRICS -->
