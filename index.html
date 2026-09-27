@@ -3,130 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X | Premium Task Marketplace & Reward Portal</title>
-    <!-- Professional Typography & Icons -->
+    <title>Earn2X | Premium Task Marketplace</title>
+    <!-- Professional Typography -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com"></script>
     <style>
         * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.2s ease; }
         body { background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; overflow-x: hidden; }
-        .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; background-color: #0b0f19; padding-bottom: 60px; position: relative; border-left: 1px solid #1e293b; border-right: 1px solid #1e293b; }
+        .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; background-color: #0b0f19; padding-bottom: 80px; border-left: 1px solid #1e293b; border-right: 1px solid #1e293b; }
         .view-section { display: none; padding: 16px; }
-        .view-section.active { display: block; animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* UI Components Styling */
+        .view-section.active { display: block; }
         .glass-card { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 16px; backdrop-filter: blur(8px); margin-bottom: 16px; }
-        .gradient-border-btn { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border: none; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 14px; width: 100%; cursor: pointer; display: block; text-align: center; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3); }
+        .gradient-border-btn { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border: none; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 14px; width: 100%; cursor: pointer; display: block; text-align: center; text-decoration: none; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3); }
         .gradient-border-btn:active { transform: scale(0.98); }
-        .secondary-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 12px; padding: 12px; font-weight: 600; font-size: 13px; width: 100%; cursor: pointer; text-align: center; }
-        
-        /* Form fields overrides */
+        .secondary-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 12px; padding: 12px; font-weight: 600; font-size: 13px; width: 100%; cursor: pointer; text-align: center; display: block; text-decoration: none; }
+        .btn-admin { background: #dc2626; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
         input, textarea, select { width: 100%; padding: 12px; background: #111827; border: 1px solid #334155; border-radius: 10px; color: white; font-size: 14px; margin-top: 6px; margin-bottom: 14px; }
-        input:focus, select:focus { border-color: #3b82f6; outline: none; }
-        
-        /* Top Navigation Bar */
-        .platform-navbar { background: rgba(11, 15, 25, 0.85); border-bottom: 1px solid #1e293b; padding: 16px; sticky: top; position: sticky; top: 0; backdrop-filter: blur(12px); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
-        .logo-text { font-size: 20px; font-weight: 800; tracking-spacing: -0.5px; color: #3b82f6; }
-        
-        /* Bottom Corporate Navigation Tabs */
-        .bottom-nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: #0b0f19; border-top: 1px solid #1e293b; display: grid; grid-template-columns: repeat(5, 1fr); padding: 8px 0; z-index: 999; }
-        .nav-item { text-align: center; background: none; border: none; color: #64748b; font-size: 10px; font-weight: 600; cursor: pointer; }
+        .platform-navbar { background: rgba(11, 15, 25, 0.85); border-bottom: 1px solid #1e293b; padding: 16px; position: sticky; top: 0; backdrop-filter: blur(12px); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo-text { font-size: 20px; font-weight: 800; color: #3b82f6; }
+        .bottom-nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: #0b0f19; border-top: 1px solid #1e293b; display: grid; grid-template-columns: repeat(4, 1fr); padding: 12px 0; z-index: 999; }
+        .nav-item { text-align: center; background: none; border: none; color: #64748b; font-size: 11px; font-weight: 600; cursor: pointer; }
         .nav-item.active { color: #3b82f6; }
-        .nav-item svg { display: block; margin: 0 auto 4px auto; width: 20px; height: 20px; fill: currentColor; }
-        
-        /* Metrics Progress Bars */
         .progress-track { width: 100%; background: #1e293b; height: 8px; border-radius: 99px; overflow: hidden; margin: 8px 0; }
         .progress-fill { background: linear-gradient(90deg, #10b981 0%, #059669 100%); height: 100%; border-radius: 99px; }
-        
-        /* Dynamic Badges styling */
         .badge { display: inline-block; padding: 4px 8px; font-size: 10px; font-weight: 700; border-radius: 6px; text-transform: uppercase; }
         .badge-active { background: rgba(16, 185, 129, 0.15); color: #10b981; }
-        .badge-pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
         .badge-admin { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .task-card { background: rgba(30, 41, 59, 0.2); border: 1px solid #1e293b; border-left: 4px solid #3b82f6; padding: 14px; border-radius: 12px; margin-bottom: 12px; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         
-        <!-- GLOBAL APP TOP BAR -->
+        <!-- HEADER -->
         <header class="platform-navbar">
             <span class="logo-text">EARN<span style="color:white;">2X</span></span>
-            <span id="role-badge" class="badge badge-active" onclick="switchSection('admin')">👤 User Mode</span>
+            <span id="role-badge" class="badge badge-admin" onclick="switchSection('admin')">👑 CEO Dashboard</span>
         </header>
 
-        <!-- A. HOMEPAGE PORTAL LANDING SYSTEM -->
-        <section id="view-home" class="view-section active space-y-6">
+        <!-- 1. HOME LANDING SECTION -->
+        <div id="view-home" class="view-section active">
             <div class="glass-card" style="text-align:center; padding: 32px 16px;">
-                <h1 style="font-size:28px; font-weight:800; line-height:1.2; margin-bottom:12px;">Complete Legitimate <br><span style="color:#3b82f6;">Digital Tasks.</span></h1>
-                <p style="color:#94a3b8; font-size:14px; margin-bottom:24px;">Nigeria's premium verified task-and-rewards platform. Secure an entries membership package to begin optimization.</p>
-                <button class="gradient-border-btn" style="margin-bottom:12px;" onclick="switchSection('plans')">Explore Membership Plans</button>
-                <button class="secondary-btn" onclick="switchSection('auth')">Access Account Login Portal</button>
+                <h1 style="font-size:26px; font-weight:800; line-height:1.2; margin-bottom:12px; color:white;">Complete Legitimate <br><span style="color:#3b82f6;">Digital Tasks.</span></h1>
+                <p style="color:#94a3b8; font-size:13px; margin-bottom:24px;">Nigeria's premium verified task marketplace. Purchase a 3-month access pass to start earning disclosed rewards.</p>
+                <button class="gradient-border-btn" style="margin-bottom:12px;" onclick="switchSection('dashboard')">Enter Customer Dashboard</button>
+                <button class="secondary-btn" onclick="switchSection('plans')">View Membership Access Plans</button>
             </div>
-            
             <div class="glass-card">
-                <h3 style="margin-bottom:12px;">How The Platform Operates</h3>
-                <p style="font-size:13px; color:#94a3b8; line-height:1.5;">Earn2x connects top digital brands with verified users. Members fulfill daily task targets (polls, UX feedback surveys, creative challenges) and accumulate disclosed points metrics directly into their secure balances wallet. <b>100 Points translates exactly to ₦100.</b></p>
+                <h3 style="color:white; margin:0 0 8px 0; font-size:14px;">How Withdrawals Work</h3>
+                <p style="font-size:12px; color:#94a3b8; margin:0; line-height:1.5;">When your available balance hits the minimum threshold of **5,000 points (₦5,000)**, you can instantly request local bank disbursal payouts directly from your wallet panel.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- B. SECURE USER SIGN IN & SIGN UP LAYOUT -->
-        <section id="view-auth" class="view-section">
-            <div class="glass-card">
-                <h2 id="auth-view-header" style="color:white; font-size:20px; font-weight:800; border:none; margin-bottom:6px;">Welcome to Earn2X</h2>
-                <p style="color:#64748b; font-size:12px; margin-bottom:16px;">Provision secure workspace data mappings parameters logs.</p>
-                
-                <form id="frm-platform-auth" onsubmit="handleAccountAuth(event)">
-                    <div id="auth-name-wrapper">
-                        <label>Full Legal Name</label>
-                        <input type="text" id="auth-name" placeholder="John Benunoh">
-                    </div>
-                    <label>Email Address Anchor</label>
-                    <input type="email" id="auth-email" required placeholder="johnunoh555@gmail.com">
-                    
-                    <label>Secure Password</label>
-                    <input type="password" id="auth-password" required placeholder="••••••••">
-                    
-                    <button type="submit" class="gradient-border-btn" style="margin-top:8px;">Execute Session Verification</button>
-                </form>
-                <p style="text-align:center; font-size:12px; color:#94a3b8; margin-top:16px; cursor:pointer;" id="auth-toggle-msg" onclick="toggleAuthMode()">Don't have an account? Create one</p>
-            </div>
-        </section>
-
-        <!-- C. CLIENT WORKSPACE DASHBOARD TERMINAL -->
-        <section id="view-dashboard" class="view-section">
+        <!-- 2. CUSTOMER DASHBOARD WORKSPACE -->
+        <div id="view-dashboard" class="view-section">
             <div class="glass-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%);">
                 <div style="display:flex; justify-content:space-between; align-items:start;">
                     <div>
-                        <span style="font-size:12px; color:#64748b; font-weight:600;">Welcome Back,</span>
-                        <h2 id="dash-username" style="color:white; font-size:22px; font-weight:800; margin:2px 0 0 0; border:none; padding:0;">Customer Name</h2>
+                        <span style="font-size:11px; color:#64748b; font-weight:600;">Welcome Back,</span>
+                        <h2 style="color:white; font-size:20px; font-weight:800; margin:2px 0 0 0;">John Benunoh</h2>
                     </div>
-                    <span id="dash-plan-badge" class="badge badge-active" style="background:#2563eb; color:white; font-size:11px;">GOLD Tier</span>
+                    <span class="badge badge-active" style="background:#2563eb; color:white;">GOLD PLAN</span>
                 </div>
                 
-                <div style="margin-top:20px; display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                <div style="margin-top:16px; display:grid; grid-template-columns: 1fr 1fr; gap:12px; text-align:left;">
                     <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px;">
                         <span style="font-size:11px; color:#64748b;">Wallet Balance</span>
-                        <p id="dash-txt-ngn" style="font-size:18px; font-weight:800; color:#10b981; margin:4px 0 0 0;">₦3,750</p>
-                        <p id="dash-txt-pts" style="font-size:11px; color:#94a3b8; margin:2px 0 0 0;">3,750 Points</p>
+                        <p style="font-size:18px; font-weight:800; color:#10b981; margin:4px 0 0 0;" id="lbl-balance-ngn">₦3,750</p>
+                        <p style="font-size:11px; color:#94a3b8; margin:2px 0 0 0;">3,750 Points</p>
                     </div>
                     <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px;">
-                        <span style="font-size:11px; color:#64748b;">Today's Target Progress</span>
-                        <p id="dash-txt-progress" style="font-size:18px; font-weight:800; color:#3b82f6; margin:4px 0 0 0;">3 / 5 Tasks</p>
+                        <span style="font-size:11px; color:#64748b;">Today's Progress</span>
+                        <p style="font-size:18px; font-weight:800; color:#3b82f6; margin:4px 0 0 0;" id="lbl-progress-txt">3 / 5 Tasks</p>
                         <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Daily Completion Cap</p>
                     </div>
                 </div>
 
                 <div style="margin-top:16px; border-top:1px dashed #334155; padding-top:12px;">
-                    <div style="display:flex; justify-content:space-between; font-size:11px; color:#94a3b8; font-weight:600;">
-                        <span>Withdrawal Settlement Meter</span>
-                        <span id="dash-txt-remaining">₦3,750 / ₦5,000 (₦1,250 Left)</span>
+                    <div style="display:flex; justify-content:space-between; font-size:11px; color:#94a3b8;">
+                        <span>Progress toward withdrawal</span>
+                        <span id="lbl-remaining-txt">₦3,750 / ₦5,000 (₦1,250 left)</span>
                     </div>
-                    <div class="progress-track"><div id="dash-progress-fill" class="progress-fill" style="width: 75%;"></div></div>
+                    <div class="progress-track"><div class="progress-fill" id="bar-withdrawal-progress" style="width: 75%;"></div></div>
                 </div>
             </div>
 
-            <!-- MEMBERSHIP DURATION TRACKER META METRICS -->
+            <!-- MEMBERSHIP COUNTDOWN METRIC -->
+            <div class="glass-card" style="border-left: 4px solid #ea580c; display:flex; justify-content:space-between; align-items:center; padding:12px 16px;">
+                <div style="font-size:11px;">
+                    <p style="margin:0; font-weight:700; color:#e2e8f0;">Membership Status: <span style="color:#10b981;">ACTIVE</span></p>
+                    <p style="margin:2px 0 0 0; color:#64748b;">Activated: 10 Sep 2026 | Expires: 10 Dec 2026</p>
+                </div>
+                <span style="background:rgba(234,88,12,0.15); color:#ea580c; padding:4px 8px; border-radius:6px; font-weight:800; font-size:11px;">72 Days Left</span>
+            </div>
+
+            <h3 style="font-size:14px; font-weight:700; margin:20px 0 10px 0; color:white;">Your Active Plan Task Pool</h3>
+            <div id="dashboard-tasks-pool-list">
+                <!-- Preloaded active user tasks elements go here -->
+            </div>
+        </div>
+
+        <!-- 3. PREMIUM WALLET & BANK CASHOUT SYSTEM -->
+        <div id="view-wallet" class="view-section">
+            <div class="glass-card" style="background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border-color: #312e81;">
+                <span style="font-size:11px; color:#94a3b8; font-weight:600;">AVAILABLE ELIGIBLE BALANCE</span>
+                <h2 style="font-size:32px; font-weight:900; color:#10b981; margin:4px 0 16px 0;" id="lbl-wallet-main">₦3,750.00</h2>
+                
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:4px; border-top:1px solid #1e293b; padding-top:12px; text-align:center; font-size:11px;">
+                    <div><p style="color:#64748b; margin:0;">Pending</p><p style="color:#f59e0b; font-weight:700; margin:2px 0 0 0;" id="lbl-wallet-pend">₦500.00</p></div>
+                    <div><p style="color:#64748b; margin:0;">Total Earned</p><p style="color:#3b82f6; font-weight:700; margin:2px 0 0 0;">₦8,750.00</p></div>
+                    <div><p style="color:#64748b; margin:0;">Total Withdrawn</p><p style="color:#cbd5e1; font-weight:700; margin:2px 0 0 0;">₦5,000.00</p></div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="border: 1px solid #334155;">
