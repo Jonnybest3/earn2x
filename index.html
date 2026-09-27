@@ -3,129 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X | Complete Tasks, Get Compensated</title>
-    <script src="https://jsdelivr.net"></script>
-    <script src="https://paystack.co"></script>
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        .page-view { display: none; }
-        .page-view.active { display: block; }
-    </style>
+    <title>Earn2X</title>
+    <!-- Lightweight mobile styling engine -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <script src="https://unpkg.com"></script>
+    <style>.view-section { display: none; } .view-section.active { display: block; }</style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased">
-
-    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-50 shadow-md">
-        <div class="flex justify-between items-center max-w-4xl mx-auto">
-            <a href="#" onclick="showPage('home')" class="text-xl font-bold tracking-wider">Earn2X</a>
-            <div id="nav-links" class="space-x-3 text-sm flex items-center">
-                <a href="#" onclick="showPage('how-it-works')" class="hover:underline">How It Works</a>
-                <a href="#" onclick="showPage('plans')" class="hover:underline">Plans</a>
-                <a href="#" onclick="showPage('auth')" id="nav-auth-btn" class="bg-white text-blue-600 px-3 py-1 rounded-sm font-semibold">Login / Register</a>
-            </div>
+<body class="bg-gray-50 text-gray-900 font-sans p-4">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-3 rounded mb-4 flex justify-between items-center text-sm font-bold">
+        <a href="#" onclick="showSection('home')">Earn2X</a>
+        <div class="space-x-3">
+            <a href="#" onclick="showSection('plans')">Plans</a>
+            <a href="#" id="auth-nav-link" onclick="showSection('auth')">Join Portal</a>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-6">
-        <!-- HOME VIEW -->
-        <section id="page-home" class="page-view active text-center py-12 space-y-4">
-            <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                Complete Tasks. Deliver Value. <span class="text-blue-600">Get Compensated.</span>
-            </h1>
-            <p class="text-gray-600 max-w-md mx-auto">
-                Access legitimate, paid tasks and services. Choose a security plan to unlock immediate job allocation records.
-            </p>
-            <div class="pt-4 space-x-2">
-                <button onclick="showPage('plans')" class="bg-blue-600 text-white px-6 py-3 rounded-md font-bold shadow-sm inline-block">View Security Plans</button>
+    <!-- Home Page View -->
+    <section id="sec-home" class="view-section active text-center py-6 space-y-3">
+        <h1 class="text-2xl font-black text-gray-800">Complete Tasks. Get Paid.</h1>
+        <p class="text-sm text-gray-600 max-w-xs mx-auto">Access legitimate, paid tasks. Activate a security plan layout to start allocation tracking.</p>
+        <button onclick="showSection('plans')" class="bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded shadow">View Membership Plans</button>
+    </section>
+
+    <!-- Plans Page View -->
+    <section id="sec-plans" class="view-section hidden space-y-3">
+        <h2 class="text-lg font-bold text-center text-gray-700">Select Access Plan</h2>
+        <div class="grid gap-3 grid-cols-2 text-xs">
+            <div class="bg-white p-3 rounded border shadow-sm">
+                <h3 class="font-bold">Basic</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦1,000</p>
+                <button onclick="showSection('auth')" class="bg-gray-800 text-white w-full py-1 rounded font-bold">Select</button>
             </div>
-        </section>
-
-        <!-- HOW IT WORKS VIEW -->
-        <section id="page-how-it-works" class="page-view bg-white p-6 rounded-lg shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold border-b pb-2 text-gray-800">How It Works</h2>
-            <ul class="space-y-4">
-                <li class="flex items-start gap-3"><span class="bg-blue-100 text-blue-700 font-bold rounded-full h-6 w-6 flex items-center justify-center shrink-0">1</span><p><strong>Register & Login:</strong> Secure your profile parameters.</p></li>
-                <li class="flex items-start gap-3"><span class="bg-blue-100 text-blue-700 font-bold rounded-full h-6 w-6 flex items-center justify-center shrink-0">2</span><p><strong>Activate Plan:</strong> Process security deposits to assign tasks.</p></li>
-                <li class="flex items-start gap-3"><span class="bg-blue-100 text-blue-700 font-bold rounded-full h-6 w-6 flex items-center justify-center shrink-0">3</span><p><strong>Task Submission:</strong> Execute assigned operations efficiently.</p></li>
-                <li class="flex items-start gap-3"><span class="bg-blue-100 text-blue-700 font-bold rounded-full h-6 w-6 flex items-center justify-center shrink-0">4</span><p><strong>Compensation Records:</strong> Admin panel approval instantly updates your verified balances.</p></li>
-            </ul>
-        </section>
-
-        <!-- PLANS VIEW -->
-        <section id="page-plans" class="page-view space-y-6">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Membership & Security Access Levels</h2>
-            <div class="grid gap-4 sm:grid-cols-2">
-                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-xs flex flex-col justify-between">
-                    <div><h3 class="text-lg font-bold text-gray-700">Basic</h3><p class="text-2xl font-extrabold text-blue-600 my-2">₦1,000</p><p class="text-sm text-gray-500">Basic tasks/services entry tier allocation layouts.</p></div>
-                    <button onclick="purchasePlan('Basic', 1000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded-sm text-sm font-semibold">Pay Security Fee</button>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-xs flex flex-col justify-between">
-                    <div><h3 class="text-lg font-bold text-gray-700">Standard</h3><p class="text-2xl font-extrabold text-blue-600 my-2">₦5,000</p><p class="text-sm text-gray-500">Standard tasks/services with optimized return multipliers.</p></div>
-                    <button onclick="purchasePlan('Standard', 5000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded-sm text-sm font-semibold">Pay Security Fee</button>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-xs flex flex-col justify-between">
-                    <div><h3 class="text-lg font-bold text-gray-700">Premium</h3><p class="text-2xl font-extrabold text-blue-600 my-2">₦10,000</p><p class="text-sm text-gray-500">Premium high-yield operational operations logs access.</p></div>
-                    <button onclick="purchasePlan('Premium', 10000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded-sm text-sm font-semibold">Pay Security Fee</button>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-xs flex flex-col justify-between">
-                    <div><h3 class="text-lg font-bold text-gray-700">Pro</h3><p class="text-2xl font-extrabold text-blue-600 my-2">₦25,000</p><p class="text-sm text-gray-500">Full task/service access parameter metrics allocation.</p></div>
-                    <button onclick="purchasePlan('Pro', 25000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded-sm text-sm font-semibold">Pay Security Fee</button>
-                </div>
+            <div class="bg-white p-3 rounded border shadow-sm">
+                <h3 class="font-bold">Standard</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦5,000</p>
+                <button onclick="showSection('auth')" class="bg-gray-800 text-white w-full py-1 rounded font-bold">Select</button>
             </div>
-        </section>
-
-        <!-- AUTH VIEW -->
-        <section id="page-auth" class="page-view bg-white p-6 rounded-lg shadow-sm max-w-sm mx-auto space-y-4">
-            <h2 class="text-xl font-bold text-center text-gray-800" id="auth-title">Account Access Portal</h2>
-            <div class="flex border-b text-sm font-bold">
-                <button onclick="toggleAuthMode(true)" id="tab-login" class="w-1/2 py-2 text-center border-b-2 border-blue-600 text-blue-600">Login</button>
-                <button onclick="toggleAuthMode(false)" id="tab-register" class="w-1/2 py-2 text-center text-gray-400">Register</button>
+            <div class="bg-white p-3 rounded border shadow-sm">
+                <h3 class="font-bold">Premium</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦10,000</p>
+                <button onclick="showSection('auth')" class="bg-gray-800 text-white w-full py-1 rounded font-bold">Select</button>
             </div>
-            <form id="auth-form" class="space-y-3">
-                <div id="name-field-wrapper" class="hidden">
-                    <label class="block text-xs font-semibold text-gray-600 uppercase">Full Name</label>
-                    <input type="text" id="auth-name" class="w-full p-2 border rounded-sm text-sm mt-1 focus:outline-blue-500" placeholder="John Doe">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase">Email Address</label>
-                    <input type="email" id="auth-email" required class="w-full p-2 border rounded-sm text-sm mt-1 focus:outline-blue-500" placeholder="user@example.com">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase">Password</label>
-                    <input type="password" id="auth-password" required class="w-full p-2 border rounded-sm text-sm mt-1 focus:outline-blue-500" placeholder="••••••••">
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-sm font-bold text-sm shadow-xs">Process Authentication</button>
-            </form>
-        </section>
-
-        <!-- CUSTOMER DASHBOARD VIEW -->
-        <section id="page-dashboard" class="page-view space-y-6">
-            <div class="bg-white p-6 rounded-lg shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <h2 class="text-xl font-bold text-gray-800">Welcome, <span id="dash-name">User</span></h2>
-                    <p class="text-xs text-gray-500 mt-1">Tier Level: <span id="dash-plan" class="font-bold text-blue-600 uppercase">Free</span></p>
-                </div>
-                <div class="text-right">
-                    <p class="text-xs font-semibold text-gray-400 uppercase">Compensation Ledger Balance</p>
-                    <p class="text-2xl font-black text-green-600" id="dash-balance">₦0.00</p>
-                </div>
+            <div class="bg-white p-3 rounded border shadow-sm">
+                <h3 class="font-bold">Pro</h3><p class="text-blue-600 font-extrabold text-sm my-1">₦25,000</p>
+                <button onclick="showSection('auth')" class="bg-blue-600 text-white w-full py-1 rounded font-bold">Select</button>
             </div>
+        </div>
+    </section>
 
-            <div class="grid grid-cols-3 bg-gray-200 rounded-md p-1 text-xs font-bold text-center">
-                <button onclick="switchDashTab('tasks')" id="btn-tab-tasks" class="bg-white text-blue-600 py-2 rounded-sm shadow-xs w-full">Available Tasks</button>
-                <button onclick="switchDashTab('transactions')" id="btn-tab-txs" class="text-gray-600 py-2 w-full">Transactions Log</button>
-                <button onclick="switchDashTab('withdraw')" id="btn-tab-withdraw" class="text-gray-600 py-2 w-full">Withdrawal Requests</button>
+    <!-- Authentication View -->
+    <section id="sec-auth" class="view-section hidden bg-white p-4 rounded border max-w-xs mx-auto space-y-3">
+        <div class="flex border-b text-xs font-bold text-center">
+            <button onclick="setAuthMode(true)" id="tab-l" class="w-1/2 pb-2 border-b-2 border-blue-600 text-blue-600">Login</button>
+            <button onclick="setAuthMode(false)" id="tab-r" class="w-1/2 pb-2 text-gray-400">Register</button>
+        </div>
+        <form id="frm-auth" class="space-y-3 text-xs">
+            <div id="wrapper-name" class="hidden">
+                <label class="block font-bold text-gray-600">Full Name</label>
+                <input type="text" id="in-name" class="w-full p-2 border rounded mt-1" placeholder="John Doe">
             </div>
-
-            <div id="dash-tasks-container" class="dash-tab-content space-y-3">
-                <div id="allocated-tasks-list" class="space-y-2"></div>
+            <div>
+                <label class="block font-bold text-gray-600">Email Address</label>
+                <input type="email" id="in-email" required class="w-full p-2 border rounded mt-1" placeholder="user@example.com">
             </div>
-
-            <div id="dash-txs-container" class="dash-tab-content hidden space-y-3">
-                <div class="bg-white rounded border overflow-x-auto text-xs">
-                    <table class="w-full text-left border-collapse" id="tx-table-body">
-                        <thead><tr class="bg-gray-100 border-b text-gray-600 font-bold"><th class="p-2">Type</th><th class="p-2">Amount</th><th class="p-2">Status</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+            <div>
+                <label class="block font-bold text-gray-600">Password</label>
+                <input type="password" id="in-pass" required class="w-full p-2 border rounded mt-1" placeholder="••••••••">
             </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded font-bold shadow">Submit Portal Request</button>
+        </form>
+    </section>
 
+    <!-- User Dashboard View -->
+    <section id="sec-dash" class="view-section hidden space-y-4">
+        <div class="bg-white p-4 rounded border shadow-sm flex justify-between items-center text-xs">
+            <div><h2 class="font-bold text-sm">Welcome, <span id="lbl-name">User</span></h2><p class="text-gray-400">Tier: <span id="lbl-plan" class="font-bold text-blue-600">Free</span></p></div>
+            <div class="text-right"><p class="text-gray-400">Balance</p><p class="text-lg font-black text-green-600" id="lbl-balance">₦0.00</p></div>
+        </div>
+        <div class="bg-white p-3 rounded border text-xs">
+            <h3 class="font-bold text-gray-700 mb-2">Your Allocated Task Pool</h3>
+            <div id="box-tasks" class="space-y-2"></div>
+        </div>
+    </section>
+
+    <!-- Admin Panel View -->
+    <section id="sec-admin" class="view-section hidden space-y-4">
+        <h2 class="text-lg font-black text-red-600 border-b pb-1">Admin Interface Terminal</h2>
+        <form id="frm-admin-task" class="bg-white p-3 rounded border text-xs space-y-2">
+            <input type="text" id="task-t" placeholder="Task Title" required class="w-full p-2 border rounded">
+            <textarea id="task-d" placeholder="Task Guidelines" required class="w-full p-2 border rounded"></textarea>
+            <input type="number" id="task-r" placeholder="Payout Reward (₦)" required class="w-full p-2 border rounded">
+            <select id="task-p" class="w-full p-2 border rounded bg-white"><option value="Basic">Basic Tier</option><option value="Standard">Standard Tier</option><option value="Premium">Premium Tier</option><option value="Pro">Pro Tier</option></select>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded font-bold">Inject Task Object</button>
+        </form>
+        <div id="box-queue" class="space-y-2 text-xs"></div>
+    </section>
+
+    <script>
+        const client = window.supabase.createClient("https://supabase.co", "sb_publishable_6n_C8Gyazb-_1uEioVHVxA_gi0dSQ_w");
+        let activeUser = null, activeProfile = null, isLogin = true;
+
+        function showSection(id) {
+            document.querySelectorAll('.view-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`sec-${id}`).classList.remove('hidden');
+        }
+        function setAuthMode(mode) {
+            isLogin = mode;
+            document.getElementById('wrapper-name').classList.toggle('hidden', isLogin);
+            document.getElementById('tab-l').className = isLogin ? "w-1/2 pb-2 border-b-2 border-blue-600 text-blue-600" : "w-1/2 pb-2 text-gray-400";
+            document.getElementById('tab-r').className = !isLogin ? "w-1/2 pb-2 border-b-2 border-blue-600 text-blue-600" : "w-1/2 pb-2 text-gray-400";
+        }
+        document.getElementById('frm-auth').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('in-email').value, pass = document.getElementById('in-pass').value;
+            if (isLogin) {
+                const { data, error } = await client.auth.signInWithPassword({ email, password: pass });
+                if (error) return alert(error.message);
+                syncSession();
+            } else {
+                const name = document.getElementById('in-name').value;
+                const { data, error } = await client.auth.signUp({ email, password: pass });
+                if (error) return alert(error.message);
+                if (data.user) {
+                    await client.from('profiles').insert([{ id: data.user.id, email, full_name: name }]);
+                    alert("Account setup complete! Logging in...");
+                    syncSession();
+                }
+            }
+        });
+        async function syncSession() {
+            const { data: { session } } = await client.auth.getSession();
+            if (session) {
+                activeUser = session.user;
+                const { data } = await client.from('profiles').select('*').eq('id', activeUser.id).single();
+                activeProfile = data;
+                document.getElementById('auth-nav-link').outerHTML = `<button onclick="location.reload()" class="bg-red-500 text-white px-2 py-1 rounded text-xs">Logout</button>`;
+                if (activeProfile.is_admin) { showSection('admin'); pullAdminQueue(); } 
+                else { showSection('dash'); renderDash(); pullUserTasks(); }
+            }
+        }
+        function renderDash() {
+            document.getElementById('lbl-name').innerText = activeProfile.full_name || activeProfile.email;
+            document.getElementById('lbl-plan').innerText = activeProfile.plan;
+            document.getElementById('lbl-balance').innerText = `₦${parseFloat(activeProfile.balance).toLocaleString()}`;
+        }
+        async function pullUserTasks() {
+            const container = document.getElementById('box-tasks'); container.innerHTML = '';
+            const { data } = await client.from('tasks').select('*');
+            if(!data || data.length === 0) container.innerHTML = `<p class="text-gray-400 py-2">No tasks deployed yet.</p>`;
+            data.forEach(t => {
+                container.innerHTML += `<div class="bg-white p-3 rounded border shadow-2xs">
+                    <div class="flex justify-between font-bold"><h4>${t.title}</h4><span class="text-green-600">₦${t.reward}</span></div>
