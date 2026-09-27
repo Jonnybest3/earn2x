@@ -37,15 +37,16 @@
     <div class="box" style="border: 2px solid #fca5a5;">
         <h2>Master Admin Control Suite</h2>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Inject daily rotational tasks directly into the simulation grid mapping to your 5 plan structures.</p>
-        <form id="frm-admin-task" onsubmit="handleSimulatedInjection(event)">
+        
+        <div>
             <label>Task Objective Title</label>
-            <input type="text" id="task-title" required value="Starter Trivia Challenge">
+            <input type="text" id="task-title" placeholder="Type title here (e.g. Trivia Challenge)">
 
             <label>Task Guidelines / Instructions</label>
-            <textarea id="task-desc" rows="3" required>Answer 5 simple general entertainment questions correctly to complete this task. One successful submission allowed per daily task.</textarea>
+            <textarea id="task-desc" rows="3" placeholder="Type instructions here..."></textarea>
 
             <label>Earning Payout Points (100 Pts = ₦100)</label>
-            <input type="number" id="task-reward" required value="250">
+            <input type="number" id="task-reward" placeholder="e.g. 250">
 
             <label>Target Access Plan Tier Group</label>
             <select id="task-tier">
@@ -56,8 +57,9 @@
                 <option value="Premium">Premium Access Tier</option>
             </select>
 
-            <button type="submit" class="btn-admin">Inject Live Task Object</button>
-        </form>
+            <!-- Foolproof button completely disconnected from form submission constraints -->
+            <button type="button" onclick="forcedTaskInjection()" class="btn-admin">Inject Live Task Object</button>
+        </div>
     </div>
 
     <!-- 2. LIVE CUSTOMER WORK SPACE & WALLET BALANCE TRACKER -->
@@ -66,15 +68,15 @@
         
         <div class="status-badge">
             <p style="margin: 0;">👤 Profile Account: <span style="color:#0f172a;">johnunoh555@gmail.com</span></p>
-            <p style="margin: 4px 0 0 0;">🏆 Active Membership Level: <span style="color:#2563eb;" id="lbl-membership-txt">Starter Plan Member</span></p>
+            <p style="margin: 4px 0 0 0;">🏆 Active Membership Level: <span style="color:#2563eb;">Starter Plan Member</span></p>
             <p style="margin: 4px 0 0 0;">⌛ Duration Tracking: <span style="color:#ea580c;">Active | 72 Days Remaining</span></p>
             <p style="margin: 8px 0 0 0; font-size: 16px; border-top: 1px dashed #cbd5e1; padding-top: 8px;">💰 Current Wallet Balance: <span style="color:#16a34a;" id="lbl-user-balance">₦0.00 (0 Points)</span></p>
         </div>
         
         <h3 style="font-size: 14px; margin-top: 20px;">Your Available Daily Rotational Tasks Pool</h3>
         <div id="allocated-tasks-list" class="space-y-3">
-            <!-- Simulated starting task placeholder -->
-            <div class="task-card" id="demo-task-card">
+            <!-- Starting placeholder task -->
+            <div class="task-card" id="task-initial-item">
                 <div style="display:flex; justify-content:space-between; font-weight:bold; color:#1e3a8a;">
                     <span>🎮 Starter Trivia Challenge</span>
                     <span style="color:#16a34a;">+ 250 Points (₦250)</span>
@@ -82,7 +84,7 @@
                 <p style="margin:5px 0; color:#64748b; font-size:11px;">Answer 5 simple general entertainment questions correctly to complete this task. One successful submission allowed per daily task.</p>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:10px;">
                     <span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; font-weight:bold; border-radius:4px; text-transform:uppercase;">Starter Tier Option</span>
-                    <button onclick="executeSimulatedPayout(250, 'demo-task-card')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a;">Start & Complete Click</button>
+                    <button onclick="executeSimulatedPayout(250, 'task-initial-item')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a;">Start & Complete Click</button>
                 </div>
             </div>
         </div>
@@ -93,9 +95,9 @@
         <h3 style="color: #16a34a; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dcfce7; padding-bottom: 5px; margin-bottom: 15px;">Verified Bank Withdrawal Request</h3>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Minimum withdrawal threshold parameter requires exactly <b>₦5,000 (5,000 Points)</b> balance ledger logs.</p>
         
-        <form id="frm-payout-withdrawal" onsubmit="handleSimulatedWithdrawal(event)">
+        <div>
             <label>Select Local Bank</label>
-            <select id="wd-bank" required>
+            <select id="wd-bank">
                 <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
                 <option value="Access">Access Bank</option>
                 <option value="Zenith">Zenith Bank</option>
@@ -105,16 +107,16 @@
             </select>
 
             <label>Verified Bank Account Number (10 Digits)</label>
-            <input type="number" id="wd-accountnum" required placeholder="0123456789">
+            <input type="number" id="wd-accountnum" placeholder="0123456789">
 
             <label>Verified Account Legal Name</label>
-            <input type="text" id="wd-accountname" required placeholder="John Benunoh">
+            <input type="text" id="wd-accountname" placeholder="John Benunoh">
 
             <label>Withdrawal Target Amount (₦)</label>
-            <input type="number" id="wd-amount" required min="5000" placeholder="5000">
+            <input type="number" id="wd-amount" placeholder="5000">
 
-            <button type="submit" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
-        </form>
+            <button type="button" onclick="executeSimulatedWithdrawal()" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
+        </div>
     </div>
 
     <!-- 4. MEMBERSHIP ACCESS PRICE REFERENCE GRID -->
@@ -133,15 +135,16 @@
         let globalWalletBalance = 0;
         let internalTaskCounter = 0;
 
-        // Bypasses browser restrictions to render added tasks instantly on the page
-        function handleSimulatedInjection(event) {
-            event.preventDefault();
-            const title = document.getElementById('task-title').value;
-            const desc = document.getElementById('task-desc').value;
-            const reward = parseInt(document.getElementById('task-reward').value);
-            const tier = document.getElementById('task-tier').value;
+        // Fully independent injection logic that runs instantly even if fields are left blank
+        window.forcedTaskInjection = function() {
+            let title = document.getElementById('task-title').value;
+            let desc = document.getElementById('task-desc').value;
+            let rewardText = document.getElementById('task-reward').value;
+            let tier = document.getElementById('task-tier').value;
+
+            // Automated fallbacks if user leaves inputs empty
+            if (!title) title = "Custom Operational Task";
+            if (!desc) desc = "Complete the required engagement parameters successfully to claim your reward conversion points.";
+            let reward = rewardText ? parseInt(rewardText) : 500;
 
             internalTaskCounter++;
-            const newCardId = `task-generated-${internalTaskCounter}`;
-            const listBox = document.getElementById('allocated-tasks-list');
-
