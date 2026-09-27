@@ -1,135 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X | Premium Tier Task Marketplace</title>
-    <style>
-        * { box-sizing: border-box; font-family: sans-serif; transition: all 0.2s ease; }
-        body { background-color: #0f172a; color: #f8fafc; margin: 0; padding: 12px; }
-        .box { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(8px); }
-        .notice { background: #1e3a8a; color: white; padding: 12px; border-radius: 8px; font-size: 11px; text-align: center; font-weight: bold; margin-bottom: 16px; line-height: 1.4; }
-        h1 { font-size: 24px; font-weight: 800; color: #3b82f6; margin: 0 0 4px 0; text-align: center; }
-        h2 { font-size: 16px; font-weight: 700; color: #ef4444; margin: 0 0 12px 0; border-bottom: 1px solid #334155; padding-bottom: 6px; }
-        h3 { font-size: 15px; font-weight: 700; color: #3b82f6; margin: 0 0 10px 0; }
-        label { display: block; font-weight: bold; margin-top: 10px; font-size: 11px; color: #94a3b8; text-transform: uppercase; }
-        input, select, textarea { width: 100%; padding: 10px; margin-top: 4px; background: #111827; border: 1px solid #334155; border-radius: 8px; color: white; font-size: 13px; }
-        button { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; margin-top: 12px; cursor: pointer; font-size: 13px; text-align: center; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2); }
-        .btn-pay { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
-        .progress-track { width: 100%; background: #1e293b; height: 6px; border-radius: 99px; overflow: hidden; margin: 6px 0; }
-        .progress-fill { background: linear-gradient(90deg, #10b981 0%, #059669 100%); height: 100%; width: 0%; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
-        .card-stat { background: #111827; padding: 8px; border-radius: 8px; border: 1px solid #1e293b; }
-        .task-card-item { background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 10px; border: 1px solid #1e293b; border-left: 4px solid #3b82f6; margin-bottom: 10px; }
-        .plan-card { border: 1px solid #334155; padding: 14px; border-radius: 12px; margin-bottom: 12px; background: rgba(255,255,255,0.02); }
-        .chat-bubble { padding: 8px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 8px; background: rgba(255,255,255,0.05); border: 1px solid #1e293b; }
-        .support-ticket { background: #111827; border: 1px solid #ef4444; padding: 10px; border-radius: 8px; margin-bottom: 8px; }
-    </style>
-    <!-- Paystack Core SDK Integration -->
-    <script src="https://paystack.co"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+
+  <title>Earn2X | Task Marketplace</title>
+
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
-    <div class="notice">
-        📢 **TRANSPARENCY STATEMENT:** Security fee activation covers platform panel entries for 3 months. Rewards accumulate exclusively via successful task proof validation clicks.
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <b>E2</b>
+
+      <div>
+        <strong>Earn2X</strong>
+        <small>Task Marketplace</small>
+      </div>
     </div>
 
-    <div class="box" style="text-align: center;">
-        <h1>EARN2X Hub</h1>
-        <p style="margin: 0; font-size: 12px; color: #94a3b8;">Continuously Regenerating Tasks. Manual Approvals. Community Desk.</p>
-    </div>
+    <button id="menu" type="button">☰</button>
+  </header>
 
-    <!-- 1. PLANS -->
-    <div class="box" style="border: 1px solid #eab308;">
-        <h3 style="color: #eab308;">📦 Choose Your Membership Security Fee Pass</h3>
-        
-        <div class="plan-card">
-            <div style="display:flex; justify-content:space-between; font-weight:bold;"><span>STARTER TIER (PLAN 1)</span><span style="color:#3b82f6;">₦2,500</span></div>
-            <p style="margin:4px 0; font-size:11px; color:#64748b;">Security Fee: <b>₦2,500</b> | Limit: 10 Tasks / day (₦25 per task click).</p>
-            <button class="btn-pay" onclick="payWithPaystack('Starter', 2500, 10, 25)">Pay Security Fee & Activate</button>
-        </div>
 
-        <div class="plan-card">
-            <div style="display:flex; justify-content:space-between; font-weight:bold;"><span>BRONZE TIER (PLAN 2)</span><span style="color:#f97316;">₦5,000</span></div>
-            <p style="margin:4px 0; font-size:11px; color:#64748b;">Security Fee: <b>₦5,000</b> | Limit: 12 Tasks / day (₦50 per task click).</p>
-            <button class="btn-pay" onclick="payWithPaystack('Bronze', 5000, 12 50)">Pay Security Fee & Activate</button>
-        </div
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <a href="#plans">Plans</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#withdrawSection">Withdraw</a>
+    <a href="#support">Support</a>
+  </nav>
 
-        <div class="plan-card">
-            <div style="display:flex; justify-content:space-between; font-weight:bold;"><span>💎 PREMIUM TIER (PLAN 5)</span><span style="color:#a855f7;">₦40,000</span></div>
-            <p style="margin:4px 0; font-size:11px; color:#64748b;">Security Fee: <b>₦40,000</b> | Limit: 18 Tasks / day (₦416.5 per task click).</p>
-            <button class="btn-pay" onclick="payWithPaystack('Premium', 40000, 18, 416.5)">Pay Security Fee & Activate</button>
-        </div>
-    </div>
 
-    <!-- 2. DASHBOARD -->
-    <div class="box" style="border: 1px solid #3b82f6;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h3>🎯 Customer Dashboard Area</h3>
-            <span style="background: #2563eb; color: white; padding: 2px 6px; font-size: 10px; font-weight: bold; border-radius: 4px;" id="lbl-active-plan">FREE TIER (INACTIVE)</span>
-        </div>
-        
-        <div class="grid-2" style="font-size: 12px;">
-            <div class="card-stat">
-                <span style="color: #64748b; font-size: 10px;">Available Wallet Balance</span>
-                <p style="margin: 4px 0 0 0; font-size: 16px; font-weight: bold; color: #10b981;" id="txt-user-bal">₦0.00</p>
-                <p style="margin: 2px 0 0 0; color: #94a3b8; font-size: 9px;" id="txt-user-pts">0 Points Accumulated</p>
-            </div>
-            <div class="card-stat">
-                <span style="color: #64748b; font-size: 10px;">Today's Completed Progress</span>
-                <p style="margin: 4px 0 0 0; font-size: 16px; font-weight: bold; color: #3b82f6;" id="txt-user-cap">0 / 0 Tasks</p>
-                <p style="margin: 2px 0 0 0; color: #64748b; font-size: 9px;">Daily Completion Ceiling Cap</p>
-            </div>
-        </div>
+  <main>
 
-        <div style="margin-top: 12px; font-size: 11px;">
-            <div style="display: flex; justify-content: space-between; color: #94a3b8; font-weight: 600;">
-                <span>Withdrawal Progress Meter (₦2,000 Min)</span>
-                <span id="txt-user-remaining">₦0 / ₦2,000 (₦2,000 Left)</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" id="bar-user-fill" style="width:0%;"></div></div>
-            <p style="margin: 6px 0 0 0; color: #ea580c; font-size: 10px; font-weight: 700;" id="lbl-days-left">⚠️ Status: Inactive Pass. Activate a plan security fee to open task loops.</p>
-        </div>
+    <!-- HERO -->
+    <section class="hero">
 
-        <h3 style="font-size: 13px; margin-top: 16px; color: white;">Your Regenerating Daily Operations Pool</h3>
-        <div id="dynamic-tasks-pool-box">
-            <p style="color:#64748b; font-size:11px; text-align:center; padding:10px;">Activate a security access fee package tier above to load dynamic task streams.</p>
-        </div>
-    </div>
+      <div>
+        <span class="eyebrow">TRUSTED TASK WORKSPACE</span>
 
-    <!-- 3. WITHDRAWAL -->
-    <div class="box" style="border: 1px solid #10b981;">
-        <h3 style="color: #10b981;">💳 Verified Local Bank Withdrawal Request</h3>
-        <p style="margin: 0 0 10px 0; font-size: 11px; color: #94a3b8;">System withdrawal limits enforced: <b>Minimum: ₦2,000 | Maximum: ₦30,000,000</b> per instance.</p>
-        
-        <div style="font-size: 11px;">
-            <label>Select Financial Institution Bank</label>
-            <select id="bank-name"><option value="GTBank">Guaranty Trust Bank (GTBank)</option><option value="Opay">OPay Digital Services</option><option value="Zenith">Zenith Bank</option></select>
-            <label>10-Digit Account Number</label>
-            <input type="number" id="bank-acct" placeholder="0123456789">
-            <label>Verified Account Legal Name</label>
-            <input type="text" id="bank-title" placeholder="John Benunoh">
-            <label>Cashout Target Payout Amount (₦)</label>
-            <input type="number" id="bank-amount" placeholder="Min 2000 - Max 30000000">
-            <button type="button" onclick="submitUserWithdrawalRequest()" style="background: #10b981;">Submit Settlement Withdrawal Request</button>
-        </div>
-    </div>
+        <h1>
+          Complete tasks.<br>
+          <em>Track everything.</em>
+        </h1>
 
-    <!-- 4. CHAT -->
-    <div class="box" style="border: 1px solid #a855f7;">
-        <h3 style="color: #a855f7;">💬 Earn2X Members Community Hub</h3>
-        <div id="chat-messages-box" style="max-height: 180px; overflow-y: auto; margin-bottom: 10px; padding: 4px;">
-            <div class="chat-bubble"><b style="color:#a855f7;">Chinedu_K:</b> Just activated Bronze tier! Tasks are regenerating smoothly. 🚀</div>
-            <div class="chat-bubble"><b style="color:#eab308;">Tunde_Dev:</b> My ₦5,000 payout request was just cleared by the owner! God bless Earn2X.</div>
-            <div class="chat-bubble"><b style="color:#3b82f6;">Blessing_N:</b> Minimum cashout is now ₦2,000, which is much faster to reach! Loving Plan 1.</div>
-        </div>
-        <div style="display:flex; gap:6px;">
-            <input type="text" id="chat-input-text" placeholder="Type community chat message..." style="margin:0; font-size:12px;">
-            <button type="button" onclick="postCommunityChatMessage()" style="margin:0; width:auto; padding:0 16px; background:#a855f7;">Send</button>
-        </div>
-    </div>
+        <p>
+          Manage task access, activity, wallet and support
+          from one clean dashboard.
+        </p>
 
-    <!-- 5. COMPLAINTS -->
-    <div class="box" style="border: 1px solid #06b6d4;">
-        <h3 style="color: #06b6d4;">🛠️ Support Helpdesk & Complaints Panel</h3>
+        <a class="primary" href="#plans">
+          View access plans →
+        </a>
+      </div>
+
+
+      <div class="heroCard">
         <div>
+          <small>AVAILABLE DEMO BALANCE</small>
+
+          <strong id="heroBalance">₦0.00</strong>
+
+          <small>Live browser demo</small>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- TRUST -->
+    <section class="trust">
+      <span>✓ Clear pricing</span>
+      <span>✓ Activity
