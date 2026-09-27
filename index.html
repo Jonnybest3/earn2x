@@ -3,132 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn2X | Ultimate Task & Reward Platform Hub</title>
-    <!-- Lightweight Mobile Styling Utility Grid Framework Engine -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <script src="https://unpkg.com"></script>
+    <title>Earn2X Master Hub</title>
+    <!-- Built-in Native Mobile CSS Stylesheet (Bypasses Network Locks) -->
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f1f5f9; }
-        .view-tab { display: none; }
-        .view-tab.active { display: block; }
-        .alert-toast { position: fixed; top: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        body { font-family: -apple-system, sans-serif; padding: 15px; background: #f8fafc; color: #334155; max-width: 500px; margin: 0 auto; line-height: 1.4; }
+        .box { background: white; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .notice { background: #1e3a8a; color: white; padding: 12px; border-radius: 6px; font-size: 11px; text-align: center; font-weight: 600; margin-bottom: 20px; }
+        h1 { font-size: 24px; font-weight: 900; color: #1e3a8a; margin: 0 0 10px 0; text-align: center; }
+        h2 { font-size: 18px; font-weight: 800; color: #dc2626; margin: 0 0 15px 0; border-bottom: 2px solid #fee2e2; padding-bottom: 5px; }
+        h3 { font-size: 16px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
+        label { display: block; font-weight: bold; margin-top: 12px; font-size: 12px; color: #475569; }
+        input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; }
+        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; }
+        .btn-admin { background: #dc2626; }
+        .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .plan-card { border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; text-align: center; background: #f8fafc; font-size: 12px; }
+        .task-card { border-left: 4px solid #16a34a; background: #f8fafc; padding: 12px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e2e8f0; border-left: 4px solid #16a34a; }
+        .status-badge { background: #eff6ff; color: #2563eb; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 15px; border: 1px solid #dbeafe; }
     </style>
+    <!-- Direct cloud database integration script -->
+    <script src="https://unpkg.com"></script>
 </head>
-<body class="text-gray-900 antialiased bg-slate-50">
+<body>
 
     <!-- PLATFORM CORE NOTICE BANNER -->
-    <div class="bg-blue-900 text-white px-4 py-2 text-center text-xs font-semibold">
-        📢 NOTICE: Earn2x is a performance task and rewards framework. Access duration metrics are active for 3 months from plan activation. Rewards are accumulated strictly via successful completion parameters and are never guaranteed inherently by membership purchases.
+    <div class="notice">
+        📢 NOTICE: Earn2x is a task rewards framework active for 3 months from plan activation. Rewards are accumulated strictly via successful completion parameters and are never guaranteed inherently by membership purchases.
     </div>
 
-    <!-- RESPONSIVE DYNAMIC NAVIGATION MODULE -->
-    <nav class="bg-blue-700 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" onclick="routeTo('home')" class="font-black text-xl tracking-wider">Earn2X</a>
-            <div class="flex items-center space-x-2 overflow-x-auto text-xs font-bold scrollbar-none max-w-xs">
-                <a href="#" onclick="routeTo('home')" class="px-2 py-1 hover:bg-blue-600 rounded">Home</a>
-                <a href="#" onclick="routeTo('plans')" class="px-2 py-1 hover:bg-blue-600 rounded">Plans</a>
-                <a href="#" onclick="routeTo('tasks')" class="px-2 py-1 hover:bg-blue-600 rounded">Daily Tasks</a>
-                <a href="#" onclick="routeTo('withdraw')" class="px-2 py-1 hover:bg-blue-600 rounded">Withdraw</a>
-                <a href="#" id="nav-btn-auth" onclick="routeTo('auth')" class="bg-white text-blue-700 px-3 py-1 rounded shadow">Login</a>
-            </div>
+    <!-- MAIN HERO HEADER -->
+    <div class="box">
+        <h1>Earn2X Platform Hub</h1>
+        <p style="margin: 0; font-size: 13px; color: #64748b; text-align: center;">Complete daily tasks. Deliver digital value. Accumulate point conversions.</p>
+    </div>
+
+    <!-- 1. MASTER ADMINISTRATOR TERMINAL (Always Open & Ready) -->
+    <div class="box" style="border: 2px solid #fca5a5;">
+        <h2>Master Admin Control Suite</h2>
+        <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Inject daily rotational tasks directly into the global database pools mapping to your 5 plan structures.</p>
+        <form id="frm-admin-task">
+            <label>Task Objective Title</label>
+            <input type="text" id="task-title" required placeholder="e.g., Star-the-Difference Game">
+
+            <label>Task Guidelines / Instructions</label>
+            <textarea id="task-desc" rows="3" required placeholder="Describe task execution rules here..."></textarea>
+
+            <label>Earning Payout Points (100 Pts = ₦100)</label>
+            <input type="number" id="task-reward" required placeholder="250">
+
+            <label>Target Access Plan Tier Group</label>
+            <select id="task-tier">
+                <option value="Starter">Starter Access Tier</option>
+                <option value="Bronze">Bronze Access Tier</option>
+                <option value="Silver">Silver Access Tier</option>
+                <option value="Gold">Gold Access Tier</option>
+                <option value="Premium">Premium Access Tier</option>
+            </select>
+
+            <button type="submit" class="btn-admin">Inject Live Task Object</button>
+        </form>
+    </div>
+
+    <!-- 2. LIVE CUSTOMER WORK SPACE & WALLET BALANCE TRACKER -->
+    <div class="box" style="border: 2px solid #bfdbfe;">
+        <h3 style="color: #2563eb; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dbeafe; padding-bottom: 5px; margin-bottom: 15px;">Customer Work Dashboard</h3>
+        
+        <div class="status-badge">
+            <p style="margin: 0;">👤 Profile Account: <span style="color:#0f172a;" id="lbl-user-email">johnunoh555@gmail.com</span></p>
+            <p style="margin: 4px 0 0 0;">🏆 Active Membership Level: <span style="color:#2563eb;" id="lbl-user-plan">Starter Plan Member</span></p>
+            <p style="margin: 4px 0 0 0;">⌛ Duration Tracking: <span style="color:#ea580c;">Active | 72 Days Remaining</span></p>
+            <p style="margin: 8px 0 0 0; font-size: 16px; border-t: 1px dashed #cbd5e1; pt: 8px;">💰 Current Wallet Balance: <span style="color:#16a34a;" id="lbl-user-balance">₦0.00 (0 Points)</span></p>
         </div>
-    </nav>
+        
+        <h3 style="font-size: 14px; margin-top: 20px;">Your Available Daily Rotational Tasks Pool</h3>
+        <div id="allocated-tasks-list" style="font-size: 12px; color: #475569;">
+            Fetching dynamic database allocation indexes...
+        </div>
+    </div>
 
-    <!-- CONTENT INJECTION CORE STACK -->
-    <main class="max-w-4xl mx-auto px-4 py-6">
+    <!-- 3. VERIFIED LOCAL NIGERIAN BANK PAYOUT TERMINAL -->
+    <div class="box" style="border: 2px solid #bbf7d0;">
+        <h3 style="color: #16a34a; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dcfce7; padding-bottom: 5px; margin-bottom: 15px;">Verified Bank Withdrawal Request</h3>
+        <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Minimum withdrawal threshold parameter requires exactly <b>₦5,000 (5,000 Points)</b> balance ledger logs.</p>
+        
+        <form id="frm-payout-withdrawal">
+            <label>Select Local Bank</label>
+            <select id="wd-bank" required>
+                <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
+                <option value="Access">Access Bank</option>
+                <option value="Zenith">Zenith Bank</option>
+                <option value="UBA">United Bank for Africa (UBA)</option>
+                <option value="Opay">OPay Digital Services</option>
+                <option value="PalmPay">PalmPay</option>
+            </select>
 
-        <!-- A. HOME LANDING MODULE CONTAINER -->
-        <section id="tab-home" class="view-tab active space-y-6 text-center py-8">
-            <h1 class="text-3xl font-black tracking-tight text-slate-800">Complete legimate tasks.<br><span class="text-blue-600">Get Compensated.</span></h1>
-            <p class="text-sm text-gray-600 max-w-sm mx-auto">Access rotating gaming quiz engines, opinion surveys, and digital analytics evaluation workflows directly mapped to verified local payouts.</p>
-            <div class="pt-4 flex justify-center space-x-3">
-                <button onclick="routeTo('plans')" class="bg-blue-600 text-white font-bold text-xs px-5 py-3 rounded shadow-md">Explore Membership Plans</button>
-                <button onclick="routeTo('how-it-works')" class="bg-gray-200 text-gray-700 font-bold text-xs px-5 py-3 rounded">How It Works</button>
-            </div>
-        </section>
+            <label>Verified Bank Account Number (10 Digits)</label>
+            <input type="number" id="wd-accountnum" required placeholder="0123456789">
 
-        <!-- B. HOW IT WORKS INFORMATIONAL SECTION -->
-        <section id="tab-how-it-works" class="view-tab hidden bg-white p-6 rounded-lg shadow-sm space-y-4">
-            <h2 class="text-xl font-bold border-b pb-2 text-slate-800">Operational System Framework</h2>
-            <div class="space-y-3 text-sm text-gray-600">
-                <p><b>1. Select Access Rank:</b> Purchase an entries package tier mapping to specified task tracking ceilings.</p>
-                <p><b>2. Rotating Database Allocator:</b> Execute dynamic daily digital goals matching system structures.</p>
-                <p><b>3. Point Conversion Multiplier:</b> Points accumulate instantly into your ledger matrices where <b>100 points = ₦100 value</b>.</p>
-                <p><b>4. Bank Withdrawal Logs:</b> Minimum processing payouts limit threshold targets exactly <b>₦5,000 balance metric logs</b> directly to your verified local Nigerian account routing structures.</p>
-            </div>
-        </section>
+            <label>Verified Account Legal Name</label>
+            <input type="text" id="wd-accountname" required placeholder="John Benunoh">
 
-        <!-- C. MEMBERSHIP PLANS DISCOVERY SUITE -->
-        <section id="tab-plans" class="view-tab hidden space-y-6">
-            <h2 class="text-2xl font-black text-center text-slate-800">Platform Membership Access Portals</h2>
-            <div class="grid gap-4 md:grid-cols-3 sm:grid-cols-2 text-xs">
-                <!-- PLAN 1: STARTER -->
-                <div class="bg-white p-4 rounded-lg border-2 border-gray-100 flex flex-col justify-between shadow-xs">
-                    <div>
-                        <span class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Starter Access</span>
-                        <h3 class="text-lg font-black text-gray-800 mt-2">STARTER</h3>
-                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Starter">₦2,500</p>
-                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
-                            <li>🎯 <b>2 Daily Tasks</b> Pool Cap</li>
-                            <li> Access Metrics: <b>3 Months Duration</b></li>
-                            <li>🕹️ Quizzes, Polls, Simple Image Games</li>
-                        </ul>
-                    </div>
-                    <button onclick="simulatePlanPurchase('Starter', 2500)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Starter Membership</button>
-                </div>
-                <!-- PLAN 2: BRONZE -->
-                <div class="bg-white p-4 rounded-lg border-2 border-orange-100 flex flex-col justify-between shadow-xs">
-                    <div>
-                        <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Bronze Rank</span>
-                        <h3 class="text-lg font-black text-gray-800 mt-2">BRONZE</h3>
-                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Bronze">₦5,000</p>
-                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
-                            <li>🎯 <b>3 Daily Tasks</b> Pool Cap</li>
-                            <li> Access Metrics: <b>3 Months Duration</b></li>
-                            <li>🧩 Trivia, Word challenges, Short Surveys</li>
-                        </ul>
-                    </div>
-                    <button onclick="simulatePlanPurchase('Bronze', 5000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Bronze Membership</button>
-                </div>
-                <!-- PLAN 3: SILVER -->
-                <div class="bg-white p-4 rounded-lg border-2 border-slate-200 flex flex-col justify-between shadow-xs">
-                    <div>
-                        <span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Silver Rank</span>
-                        <h3 class="text-lg font-black text-gray-800 mt-2">SILVER</h3>
-                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Silver">₦10,000</p>
-                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
-                            <li>🎯 <b>4 Daily Tasks</b> Pool Cap</li>
-                            <li> Access Metrics: <b>3 Months Duration</b></li>
-                            <li>🧠 Memory Games, Puzzles, Content Rating</li>
-                        </ul>
-                    </div>
-                    <button onclick="simulatePlanPurchase('Silver', 10000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Silver Membership</button>
-                </div>
-                <!-- PLAN 4: GOLD -->
-                <div class="bg-white p-4 rounded-lg border-2 border-yellow-200 flex flex-col justify-between shadow-xs">
-                    <div>
-                        <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Gold Premium Rank</span>
-                        <h3 class="text-lg font-black text-gray-800 mt-2">GOLD</h3>
-                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Gold">₦20,000</p>
-                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
-                            <li>🎯 <b>5 Daily Tasks</b> Pool Cap</li>
-                            <li> Access Metrics: <b>3 Months Duration</b></li>
-                            <li>📹 Advanced Feedback, Video Tasks</li>
-                        </ul>
-                    </div>
-                    <button onclick="simulatePlanPurchase('Gold', 20000)" class="mt-4 bg-blue-600 text-white w-full py-2 rounded font-bold shadow">Activate Gold Membership</button>
-                </div>
-                <!-- PLAN 5: PREMIUM -->
-                <div class="bg-white p-4 rounded-lg border-2 border-purple-200 flex flex-col justify-between shadow-xs">
-                    <div>
-                        <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xxs font-bold uppercase">Elite Supreme Rank</span>
-                        <h3 class="text-lg font-black text-gray-800 mt-2">PREMIUM</h3>
-                        <p class="text-2xl font-black text-blue-600 my-2" id="plan-cost-Premium">₦40,000</p>
-                        <ul class="space-y-2 text-gray-500 mt-3 border-t pt-3">
-                            <li>🎯 <b>6 Daily Tasks</b> Pool Cap</li>
-                            <li> Access Metrics: <b>3 Months Duration</b></li>
-                            <li>💎 Premium Special UI/UX Evaluations</li>
-                        </ul>
-                    </div>
+            <label>Withdrawal Target Amount (₦)</label>
+            <input type="number" id="wd-amount" required min="5000" placeholder="5000">
+
+            <button type="submit" style="background: #16a34a;">Submit Ledger Withdrawal Payout Request</button>
+        </form>
+    </div>
+
+    <!-- 4. MEMBERSHIP ACCESS PRICE REFERENCE GRID -->
+    <div class="box">
+        <h3 style="color: #475569;">Membership Security Access Plans</h3>
+        <div class="plan-grid">
+            <div class="plan-card"><b style="color:#0f172a;">STARTER</b><br><span style="color:#2563eb; font-weight:bold;">₦2,500</span><br>2 Daily Tasks</div>
+            <div class="plan-card"><b style="color:#0f172a;">BRONZE</b><br><span style="color:#2563eb; font-weight:bold;">₦5,000</span><br>3 Daily Tasks</div>
+            <div class="plan-card"><b style="color:#0f172a;">SILVER</b><br><span style="color:#2563eb; font-weight:bold;">₦10,000</span><br>4 Daily Tasks</div>
+            <div class="plan-card"><b style="color:#0f172a;">GOLD</b><br><span style="color:#2563eb; font-weight:bold;">₦20,000</span><br>5 Daily Tasks</div>
+            <div class="plan-card" style="grid-column: span 2;"><b style="color:#0f172a;">PREMIUM ACCESS</b><br><span style="color:#2563eb; font-weight:bold;">₦40,000</span><br>6 Daily Tasks Pool Ceiling Cap</div>
+        </div>
+    </div>
+
+    <script>
+        const urlBind = "https://supabase.co";
+        const keyBind = "sb_publishable_6n_C8Gyazb-_1uEioVHVxA_gi0dSQ_w";
+        const dbClient = window.supabase.createClient(urlBind, keyBind);
+
+        // Pre-loaded simulated user reference parameters anchors
+        let activeUserId = "johnunoh555@gmail.com"; 
+        let activeProfileObject = null;
+
+        // Admin Task Injection Engine
+        document.getElementById('frm-admin-task').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('task-title').value;
+            const description = document.getElementById('task-desc').value;
+            const reward = document.getElementById('task-reward').value;
+            const allowed_plan = document.getElementById('task-tier').value;
+
+            const { error } = await dbClient.from('tasks').insert([{ title, description, reward, allowed_plan }]);
+            if (error) alert("System Ingestion Error: " + error.message);
+            else {
+                alert(`SUCCESS! New task object [${title}] pushed live to the cloud database pool matrix!`);
+                document.getElementById('frm-admin-task').reset();
+                syncPlatformDataMatrix();
+            }
+        });
+
+        // Withdrawal Escrow Request Management
+        document.getElementById('frm-payout-withdrawal').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const bankName = document.getElementById('wd-bank').value;
+            const acctNum = document.getElementById('wd-accountnum').value;
