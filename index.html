@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn2X Master Hub</title>
-    <!-- Built-in Native Mobile CSS Stylesheet (Bypasses Network Locks) -->
     <style>
         body { font-family: -apple-system, sans-serif; padding: 15px; background: #f8fafc; color: #334155; max-width: 500px; margin: 0 auto; line-height: 1.4; }
         .box { background: white; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
@@ -14,15 +13,13 @@
         h3 { font-size: 16px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
         label { display: block; font-weight: bold; margin-top: 12px; font-size: 12px; color: #475569; }
         input, textarea, select { width: 95%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; }
-        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; }
+        button { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; font-size: 14px; text-align: center; }
         .btn-admin { background: #dc2626; }
         .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .plan-card { border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; text-align: center; background: #f8fafc; font-size: 12px; }
-        .task-card { border-left: 4px solid #16a34a; background: #f8fafc; padding: 12px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e2e8f0; border-left: 4px solid #16a34a; }
+        .task-card { background: #f8fafc; padding: 12px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e2e8f0; border-left: 4px solid #16a34a; }
         .status-badge { background: #eff6ff; color: #2563eb; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 15px; border: 1px solid #dbeafe; }
     </style>
-    <!-- Direct cloud database integration script -->
-    <script src="https://unpkg.com"></script>
 </head>
 <body>
 
@@ -31,25 +28,24 @@
         📢 NOTICE: Earn2x is a task rewards framework active for 3 months from plan activation. Rewards are accumulated strictly via successful completion parameters and are never guaranteed inherently by membership purchases.
     </div>
 
-    <!-- MAIN HERO HEADER -->
     <div class="box">
         <h1>Earn2X Platform Hub</h1>
         <p style="margin: 0; font-size: 13px; color: #64748b; text-align: center;">Complete daily tasks. Deliver digital value. Accumulate point conversions.</p>
     </div>
 
-    <!-- 1. MASTER ADMINISTRATOR TERMINAL (Always Open & Ready) -->
+    <!-- 1. MASTER ADMINISTRATOR OVERRIDE TERMINAL -->
     <div class="box" style="border: 2px solid #fca5a5;">
         <h2>Master Admin Control Suite</h2>
-        <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Inject daily rotational tasks directly into the global database pools mapping to your 5 plan structures.</p>
-        <form id="frm-admin-task">
+        <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Inject daily rotational tasks directly into the simulation grid mapping to your 5 plan structures.</p>
+        <form id="frm-admin-task" onsubmit="handleSimulatedInjection(event)">
             <label>Task Objective Title</label>
-            <input type="text" id="task-title" required placeholder="e.g., Star-the-Difference Game">
+            <input type="text" id="task-title" required value="Starter Trivia Challenge">
 
             <label>Task Guidelines / Instructions</label>
-            <textarea id="task-desc" rows="3" required placeholder="Describe task execution rules here..."></textarea>
+            <textarea id="task-desc" rows="3" required>Answer 5 simple general entertainment questions correctly to complete this task. One successful submission allowed per daily task.</textarea>
 
             <label>Earning Payout Points (100 Pts = ₦100)</label>
-            <input type="number" id="task-reward" required placeholder="250">
+            <input type="number" id="task-reward" required value="250">
 
             <label>Target Access Plan Tier Group</label>
             <select id="task-tier">
@@ -69,15 +65,26 @@
         <h3 style="color: #2563eb; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dbeafe; padding-bottom: 5px; margin-bottom: 15px;">Customer Work Dashboard</h3>
         
         <div class="status-badge">
-            <p style="margin: 0;">👤 Profile Account: <span style="color:#0f172a;" id="lbl-user-email">johnunoh555@gmail.com</span></p>
-            <p style="margin: 4px 0 0 0;">🏆 Active Membership Level: <span style="color:#2563eb;" id="lbl-user-plan">Starter Plan Member</span></p>
+            <p style="margin: 0;">👤 Profile Account: <span style="color:#0f172a;">johnunoh555@gmail.com</span></p>
+            <p style="margin: 4px 0 0 0;">🏆 Active Membership Level: <span style="color:#2563eb;" id="lbl-membership-txt">Starter Plan Member</span></p>
             <p style="margin: 4px 0 0 0;">⌛ Duration Tracking: <span style="color:#ea580c;">Active | 72 Days Remaining</span></p>
-            <p style="margin: 8px 0 0 0; font-size: 16px; border-t: 1px dashed #cbd5e1; pt: 8px;">💰 Current Wallet Balance: <span style="color:#16a34a;" id="lbl-user-balance">₦0.00 (0 Points)</span></p>
+            <p style="margin: 8px 0 0 0; font-size: 16px; border-top: 1px dashed #cbd5e1; padding-top: 8px;">💰 Current Wallet Balance: <span style="color:#16a34a;" id="lbl-user-balance">₦0.00 (0 Points)</span></p>
         </div>
         
         <h3 style="font-size: 14px; margin-top: 20px;">Your Available Daily Rotational Tasks Pool</h3>
-        <div id="allocated-tasks-list" style="font-size: 12px; color: #475569;">
-            Fetching dynamic database allocation indexes...
+        <div id="allocated-tasks-list" class="space-y-3">
+            <!-- Simulated starting task placeholder -->
+            <div class="task-card" id="demo-task-card">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; color:#1e3a8a;">
+                    <span>🎮 Starter Trivia Challenge</span>
+                    <span style="color:#16a34a;">+ 250 Points (₦250)</span>
+                </div>
+                <p style="margin:5px 0; color:#64748b; font-size:11px;">Answer 5 simple general entertainment questions correctly to complete this task. One successful submission allowed per daily task.</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:10px;">
+                    <span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; font-weight:bold; border-radius:4px; text-transform:uppercase;">Starter Tier Option</span>
+                    <button onclick="executeSimulatedPayout(250, 'demo-task-card')" style="width:auto; margin:0; padding:4px 10px; font-size:10px; background:#16a34a;">Start & Complete Click</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -86,7 +93,7 @@
         <h3 style="color: #16a34a; font-size: 18px; font-weight: 800; border-bottom: 2px solid #dcfce7; padding-bottom: 5px; margin-bottom: 15px;">Verified Bank Withdrawal Request</h3>
         <p style="font-size: 11px; color: #64748b; margin-bottom: 15px;">Minimum withdrawal threshold parameter requires exactly <b>₦5,000 (5,000 Points)</b> balance ledger logs.</p>
         
-        <form id="frm-payout-withdrawal">
+        <form id="frm-payout-withdrawal" onsubmit="handleSimulatedWithdrawal(event)">
             <label>Select Local Bank</label>
             <select id="wd-bank" required>
                 <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
@@ -123,33 +130,18 @@
     </div>
 
     <script>
-        const urlBind = "https://supabase.co";
-        const keyBind = "sb_publishable_6n_C8Gyazb-_1uEioVHVxA_gi0dSQ_w";
-        const dbClient = window.supabase.createClient(urlBind, keyBind);
+        let globalWalletBalance = 0;
+        let internalTaskCounter = 0;
 
-        // Pre-loaded simulated user reference parameters anchors
-        let activeUserId = "johnunoh555@gmail.com"; 
-        let activeProfileObject = null;
-
-        // Admin Task Injection Engine
-        document.getElementById('frm-admin-task').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // Bypasses browser restrictions to render added tasks instantly on the page
+        function handleSimulatedInjection(event) {
+            event.preventDefault();
             const title = document.getElementById('task-title').value;
-            const description = document.getElementById('task-desc').value;
-            const reward = document.getElementById('task-reward').value;
-            const allowed_plan = document.getElementById('task-tier').value;
+            const desc = document.getElementById('task-desc').value;
+            const reward = parseInt(document.getElementById('task-reward').value);
+            const tier = document.getElementById('task-tier').value;
 
-            const { error } = await dbClient.from('tasks').insert([{ title, description, reward, allowed_plan }]);
-            if (error) alert("System Ingestion Error: " + error.message);
-            else {
-                alert(`SUCCESS! New task object [${title}] pushed live to the cloud database pool matrix!`);
-                document.getElementById('frm-admin-task').reset();
-                syncPlatformDataMatrix();
-            }
-        });
+            internalTaskCounter++;
+            const newCardId = `task-generated-${internalTaskCounter}`;
+            const listBox = document.getElementById('allocated-tasks-list');
 
-        // Withdrawal Escrow Request Management
-        document.getElementById('frm-payout-withdrawal').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const bankName = document.getElementById('wd-bank').value;
-            const acctNum = document.getElementById('wd-accountnum').value;
